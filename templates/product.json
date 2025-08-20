@@ -106,6 +106,32 @@
                 "padding-inline-end": 0
               },
               "blocks": {
+                "text_myCUh3": {
+                  "type": "text",
+                  "name": "Product title",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-primary--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "group_pnp4Fe": {
                   "type": "group",
                   "name": "t:names.group",
@@ -115,7 +141,7 @@
                     "content_direction": "row",
                     "vertical_on_mobile": false,
                     "horizontal_alignment": "space-between",
-                    "vertical_alignment": "flex-start",
+                    "vertical_alignment": "center",
                     "align_baseline": false,
                     "horizontal_alignment_flex_direction_column": "flex-start",
                     "vertical_alignment_flex_direction_column": "center",
@@ -146,33 +172,11 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "text_MPG4kT": {
-                      "type": "text",
-                      "name": "Product title",
-                      "settings": {
-                        "text": "<h1>{{ closest.product.title }}</h1>",
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "h3",
-                        "font": "var(--font-primary--family)",
-                        "font_size": "",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
+                    "judge_me_reviews_preview_badge_8tzmzF": {
+                      "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+                      "settings": {}
                     },
-                    "price_acTFTQ": {
+                    "price_DFUgNx": {
                       "type": "price",
                       "settings": {
                         "show_sale_price_first": true,
@@ -196,18 +200,14 @@
                     }
                   },
                   "block_order": [
-                    "text_MPG4kT",
-                    "price_acTFTQ"
+                    "judge_me_reviews_preview_badge_8tzmzF",
+                    "price_DFUgNx"
                   ]
-                },
-                "judge_me_reviews_preview_badge_q99t6n": {
-                  "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-                  "settings": {}
                 }
               },
               "block_order": [
-                "group_pnp4Fe",
-                "judge_me_reviews_preview_badge_q99t6n"
+                "text_myCUh3",
+                "group_pnp4Fe"
               ]
             },
             "divider_VJhene": {
