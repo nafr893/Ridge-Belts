@@ -1,20 +1,52 @@
-{% if product.metafields.custom.add_ons %}
+{% comment %} Debug: Check if metafield exists {% endcomment %}
+{% assign add_ons_metafield = product.metafields.custom.add_ons %}
+
+{% if add_ons_metafield %}
   <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
     <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
-    <div class="grid grid-cols-{{ block.settings.columns | default: 2 }} gap-4">
-      {% for add_on in product.metafields.custom.add_ons.value %}
-        <a href="{{ add_on.url }}" class="block border rounded-lg p-2 hover:shadow">
-          <img 
-            src="{{ add_on.featured_image | image_url: width: 300 }}" 
-            alt="{{ add_on.title }}" 
-            class="rounded"
-            width="300"
-            height="300"
-            loading="lazy"
-          >
-          <p class="mt-2 text-sm">{{ add_on.title }}</p>
-        </a>
-      {% endfor %}
+    
+    {% comment %} Debug: Show metafield type and content {% endcomment %}
+    <div style="background: #f0f0f0; padding: 10px; margin-bottom: 10px; font-size: 12px;">
+      <strong>Debug Info:</strong><br>
+      Metafield exists: {{ add_ons_metafield != blank }}<br>
+      Metafield type: {{ add_ons_metafield.type }}<br>
+      Metafield value: {{ add_ons_metafield.value }}<br>
+      Value size: {{ add_ons_metafield.value.size }}<br>
+    </div>
+    
+    {% if add_ons_metafield.value != blank and add_ons_metafield.value.size > 0 %}
+      <div class="grid grid-cols-{{ block.settings.columns | default: 2 }} gap-4">
+        {% for add_on in add_ons_metafield.value %}
+          <a href="{{ add_on.url }}" class="block border rounded-lg p-2 hover:shadow">
+            {% if add_on.featured_image %}
+              <img 
+                src="{{ add_on.featured_image | image_url: width: 300 }}" 
+                alt="{{ add_on.title }}" 
+                class="rounded"
+                width="300"
+                height="300"
+                loading="lazy"
+              >
+            {% else %}
+              <div class="rounded bg-gray-200 w-full h-48 flex items-center justify-center">
+                <span class="text-gray-500">No Image</span>
+              </div>
+            {% endif %}
+            <p class="mt-2 text-sm">{{ add_on.title }}</p>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="background: #ffe6e6; padding: 10px; border-radius: 4px;">
+        No add-on products found. Make sure the metafield has products assigned to it.
+      </p>
+    {% endif %}
+  </div>
+{% else %}
+  <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
+    <div style="background: #ffe6e6; padding: 10px; border-radius: 4px;">
+      <strong>{{ block.settings.heading | default: "Add-ons" }}</strong><br>
+      The metafield "custom.add_ons" was not found for this product.
     </div>
   </div>
 {% endif %}
