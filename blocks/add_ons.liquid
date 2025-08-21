@@ -5,7 +5,6 @@
   ></script>
   
   <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
-  <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
     <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
     <div class="grid grid-cols-{{ block.settings.columns | default: 2 }} gap-4">
       {% for add_on in product.metafields.custom.add_ons.value %}
@@ -26,7 +25,7 @@
           </a>
           
           {% comment %} Add to Cart Form {% endcomment %}
-          <product-form 
+          <product-form-component 
             class="product-form"
             data-product-id="{{ add_on.id }}"
             data-quantity-default="1"
@@ -46,7 +45,7 @@
               <!-- Live region for screen readers -->
               <div ref="liveRegion" aria-live="polite" aria-atomic="true" class="sr-only"></div>
             </form>
-          </product-form>
+          </product-form-component>
         </div>
       {% endfor %}
     </div>
