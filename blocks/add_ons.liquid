@@ -1,4 +1,10 @@
 {% if product.metafields.custom.add_ons %}
+  <script
+    src="{{ 'product-form.js' | asset_url }}"
+    type="module"
+  ></script>
+  
+  <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
   <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
     <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
     <div class="grid grid-cols-{{ block.settings.columns | default: 2 }} gap-4">
@@ -20,9 +26,13 @@
           </a>
           
           {% comment %} Add to Cart Form {% endcomment %}
-          <product-form class="product-form">
-            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-2">
-              <input type="hidden" name="id" value="{{ add_on.selected_or_first_available_variant.id }}">
+          <product-form 
+            class="product-form"
+            data-product-id="{{ add_on.id }}"
+            data-quantity-default="1"
+          >
+            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-2" on:submit="/handleSubmit">
+              <input type="hidden" name="id" value="{{ add_on.selected_or_first_available_variant.id }}" ref="variantId">
               <input type="hidden" name="quantity" value="1">
               
               {% render 'add-to-cart-button',
@@ -32,6 +42,9 @@
                 product: add_on,
                 add_to_cart_text: block.settings.button_text
               %}
+              
+              <!-- Live region for screen readers -->
+              <div ref="liveRegion" aria-live="polite" aria-atomic="true" class="sr-only"></div>
             </form>
           </product-form>
         </div>
