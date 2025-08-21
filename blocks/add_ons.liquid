@@ -20,21 +20,20 @@
           </a>
           
           {% comment %} Add to Cart Form {% endcomment %}
-          <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-2">
-            <input type="hidden" name="id" value="{{ add_on.selected_or_first_available_variant.id }}">
-            <input type="hidden" name="quantity" value="1">
-            <button 
-              type="submit" 
-              class="w-full bg-black text-white py-2 px-4 rounded text-sm hover:bg-gray-800 transition-colors"
-              {% unless add_on.available %}disabled{% endunless %}
-            >
-              {% if add_on.available %}
-                {{ block.settings.button_text | default: "Add to Cart" }}
-              {% else %}
-                Sold Out
-              {% endif %}
-            </button>
-          </form>
+          <product-form class="product-form">
+            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-2">
+              <input type="hidden" name="id" value="{{ add_on.selected_or_first_available_variant.id }}">
+              <input type="hidden" name="quantity" value="1">
+              
+              {% render 'add-to-cart-button',
+                id: 'AddToCart-' | append: add_on.id,
+                class: 'w-full button-secondary',
+                can_add_to_cart: add_on.available,
+                product: add_on,
+                add_to_cart_text: block.settings.button_text
+              %}
+            </form>
+          </product-form>
         </div>
       {% endfor %}
     </div>
