@@ -3,17 +3,39 @@
     <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
     <div class="grid grid-cols-{{ block.settings.columns | default: 2 }} gap-4">
       {% for add_on in product.metafields.custom.add_ons.value %}
-        <a href="{{ add_on.url }}" class="block border rounded-lg p-2 hover:shadow">
-          <img 
-            src="{{ add_on.featured_image | image_url: width: 300 }}" 
-            alt="{{ add_on.title }}" 
-            class="rounded"
-            width="300"
-            height="300"
-            loading="lazy"
-          >
-          <p class="mt-2 text-sm">{{ add_on.title }}</p>
-        </a>
+        <div class="border rounded-lg p-2 hover:shadow">
+          <a href="{{ add_on.url }}" class="block">
+            <img 
+              src="{{ add_on.featured_image | image_url: width: 300 }}" 
+              alt="{{ add_on.title }}" 
+              class="rounded w-full"
+              width="300"
+              height="300"
+              loading="lazy"
+            >
+            <p class="mt-2 text-sm font-medium">{{ add_on.title }}</p>
+            {% if block.settings.show_price and add_on.price %}
+              <p class="text-sm text-gray-600">{{ add_on.price | money }}</p>
+            {% endif %}
+          </a>
+          
+          {% comment %} Add to Cart Form {% endcomment %}
+          <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-2">
+            <input type="hidden" name="id" value="{{ add_on.selected_or_first_available_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button 
+              type="submit" 
+              class="w-full bg-black text-white py-2 px-4 rounded text-sm hover:bg-gray-800 transition-colors"
+              {% unless add_on.available %}disabled{% endunless %}
+            >
+              {% if add_on.available %}
+                {{ block.settings.button_text | default: "Add to Cart" }}
+              {% else %}
+                Sold Out
+              {% endif %}
+            </button>
+          </form>
+        </div>
       {% endfor %}
     </div>
   </div>
@@ -53,6 +75,22 @@
         }
       ],
       "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Add to Cart Button Text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show product price",
+      "default": true
     },
     {
       "type": "header",
