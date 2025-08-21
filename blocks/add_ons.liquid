@@ -1,0 +1,17 @@
+{% if product.metafields.custom.add_ons %}
+  <div class="product-add-ons mb-6">
+    <h3 class="text-lg font-semibold mb-2">Add-ons</h3>
+    <div class="grid grid-cols-2 gap-4">
+      {% for add_on in product.metafields.custom.add_ons.value %}
+        <a href="{{ add_on.url }}" class="block border rounded-lg p-2 hover:shadow">
+          <img 
+            src="{{ add_on.featured_image | img_url: '300x' }}" 
+            alt="{{ add_on.title }}" 
+            class="rounded"
+          >
+          <p class="mt-2 text-sm">{{ add_on.title }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
