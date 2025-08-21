@@ -1,0 +1,17 @@
+{% if product.metafields.custom.complementary_products %}
+  <div class="complementary-products mb-6">
+    <h3 class="text-lg font-semibold mb-2">Pairs well with</h3>
+    <div class="grid grid-cols-2 gap-4">
+      {% for related_product in product.metafields.custom.complementary_products.value %}
+        <a href="{{ related_product.url }}" class="block border rounded-lg p-2 hover:shadow">
+          <img 
+            src="{{ related_product.featured_image | img_url: '300x' }}" 
+            alt="{{ related_product.title }}" 
+            class="rounded"
+          >
+          <p class="mt-2 text-sm">{{ related_product.title }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

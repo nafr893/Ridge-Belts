@@ -28,7 +28,9 @@
   {% endcapture %}
 
   {% render 'group', children: children, settings: block_settings, shopify_attributes: block.shopify_attributes %}
-</div>
+
+
+  </div>
 
 {% stylesheet %}
   /* Clear padding on mobile, if not full-width */
@@ -126,7 +128,12 @@
     },
     {
       "type": "product-inventory"
-    }
+    },
+    {
+  "type": "complementary-products",
+
+},
+
   ],
   "tag": null,
   "settings": [
@@ -702,7 +709,7 @@
         "buy_buttons_eYQEYi",
         "group_Q4eVWb",
         "accordion",
-        "complementary_products"
+        "complementary-products"
       ]
     }
   ]
