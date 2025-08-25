@@ -7,7 +7,7 @@
   <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
     <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
     <div class="add-ons-carousel">
-      {% for add_on in product.metafields.custom.add_ons.value limit: 1 %}
+      {% for add_on in product.metafields.custom.add_ons.value limit: 2 %}
         <div class="add-on-card">
           <a href="{{ add_on.url }}" class="block">
             <img 
