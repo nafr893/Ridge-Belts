@@ -5,67 +5,137 @@
   ></script>
   
   <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
-    <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
-    <div class="flex flex-row flex-wrap gap-4">
-      {% for add_on in product.metafields.custom.add_ons.value %}
-        <div class="add-on-card" style="min-width: 200px; max-width: 300px;">
-          <a href="{{ add_on.url }}" class="block">
-            <img 
-              src="{{ add_on.featured_image | image_url: width: 150 }}" 
-              alt="{{ add_on.title }}" 
-              class="add-on-image"
-              width="150"
-              height="150"
-              loading="lazy"
-            >
-            <p class="mt-2 text-sm font-medium">{{ add_on.title }}</p>
-            {% if block.settings.show_price and add_on.price %}
-              <p class="text-sm text-gray-600">{{ add_on.price | money }}</p>
-            {% endif %}
-          </a>
-          
-          {% comment %} Add to Cart Form {% endcomment %}
-          <div class="add-on-product-form" data-add-on-id="{{ add_on.id }}">
-            <product-form-component 
-              class="product-form add-on-form"
-              data-product-id="{{ add_on.id }}"
-              data-quantity-default="1"
-            >
-              <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-2" on:submit="/handleSubmit">
-                <input type="hidden" name="id" value="{{ add_on.selected_or_first_available_variant.id }}" ref="variantId">
-                <input type="hidden" name="quantity" value="1">
-                
-                <!-- Debug: {{ block.settings.addon_button_text }} -->
-                <button
-                  id="AddToCart-{{ add_on.id }}"
-                  type="submit"
-                  name="add"
-                  class="button add-on-button"
-                  {% unless add_on.available %}disabled{% endunless %}
-                >
-                  {{ block.settings.addon_button_text | default: "+" }}
-                </button>
-                
-                <!-- Live region for screen readers -->
-                <div ref="liveRegion" aria-live="polite" aria-atomic="true" class="sr-only"></div>
-              </form>
-            </product-form-component>
+    <div class="add-ons-header">
+      <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
+      <div class="add-ons-navigation">
+        <button class="add-ons-arrow add-ons-arrow--prev" onclick="slideAddOns('prev')" aria-label="Previous add-ons">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
+        </button>
+        <button class="add-ons-arrow add-ons-arrow--next" onclick="slideAddOns('next')" aria-label="Next add-ons">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="add-ons-carousel-container">
+      <div class="add-ons-carousel" id="addOnsCarousel">
+        {% for add_on in product.metafields.custom.add_ons.value %}
+          <div class="add-on-card" data-slide="{{ forloop.index0 }}">
+            <a href="{{ add_on.url }}" class="block">
+              <img 
+                src="{{ add_on.featured_image | image_url: width: 150 }}" 
+                alt="{{ add_on.title }}" 
+                class="add-on-image"
+                width="150"
+                height="150"
+                loading="lazy"
+              >
+              <p class="mt-2 text-sm font-medium">{{ add_on.title }}</p>
+              {% if block.settings.show_price and add_on.price %}
+                <p class="text-sm text-gray-600">{{ add_on.price | money }}</p>
+              {% endif %}
+            </a>
+            
+            {% comment %} Add to Cart Form {% endcomment %}
+            <div class="add-on-product-form" data-add-on-id="{{ add_on.id }}">
+              <product-form-component 
+                class="product-form add-on-form"
+                data-product-id="{{ add_on.id }}"
+                data-quantity-default="1"
+              >
+                <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-2" on:submit="/handleSubmit">
+                  <input type="hidden" name="id" value="{{ add_on.selected_or_first_available_variant.id }}" ref="variantId">
+                  <input type="hidden" name="quantity" value="1">
+                  
+                  <!-- Debug: {{ block.settings.addon_button_text }} -->
+                  <button
+                    id="AddToCart-{{ add_on.id }}"
+                    type="submit"
+                    name="add"
+                    class="button add-on-button"
+                    {% unless add_on.available %}disabled{% endunless %}
+                  >
+                    {{ block.settings.addon_button_text | default: "+" }}
+                  </button>
+                  
+                  <!-- Live region for screen readers -->
+                  <div ref="liveRegion" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+                </form>
+              </product-form-component>
+            </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% endif %}
 
 {% stylesheet %}
 
+/* Header with navigation arrows */
+.add-ons-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.add-ons-navigation {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.add-ons-arrow {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-ons-arrow:hover {
+  background: #e9ecef;
+  border-color: #ccc;
+}
+
+.add-ons-arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.add-ons-arrow svg {
+  color: #333;
+}
+
+/* Carousel container */
+.add-ons-carousel-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.add-ons-carousel {
+  display: flex;
+  transition: transform 0.3s ease;
+  gap: 1rem;
+}
+
 .add-on-card {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 0.5rem;
-  flex-shrink: 0;
+  flex: 0 0 calc(50% - 0.5rem); /* Show 2 items at a time */
   position: relative;
   z-index: 1;
+  min-width: 200px;
 }
 
 .add-on-card:hover {
@@ -90,9 +160,70 @@
   pointer-events: none;
 }
 
+/* Responsive design */
+@media (max-width: 768px) {
+  .add-on-card {
+    flex: 0 0 100%; /* Show 1 item at a time on mobile */
+  }
+  
+  .add-ons-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  
+  .add-ons-navigation {
+    align-self: flex-end;
+  }
+}
+
 {% endstylesheet %}
 
 <script type="module">
+  // Carousel functionality for add-ons
+  let currentSlide = 0;
+  const itemsPerView = window.innerWidth <= 768 ? 1 : 2; // Show 1 item on mobile, 2 on desktop
+  
+  function slideAddOns(direction) {
+    const carousel = document.getElementById('addOnsCarousel');
+    const items = carousel.querySelectorAll('.add-on-card');
+    const totalItems = items.length;
+    const maxSlide = Math.max(0, totalItems - itemsPerView);
+    
+    if (direction === 'next') {
+      currentSlide = Math.min(currentSlide + 1, maxSlide);
+    } else {
+      currentSlide = Math.max(currentSlide - 1, 0);
+    }
+    
+    const translateX = -(currentSlide * (100 / itemsPerView));
+    carousel.style.transform = `translateX(${translateX}%)`;
+    
+    // Update arrow states
+    updateArrowStates(currentSlide, maxSlide);
+  }
+  
+  function updateArrowStates(current, max) {
+    const prevBtn = document.querySelector('.add-ons-arrow--prev');
+    const nextBtn = document.querySelector('.add-ons-arrow--next');
+    
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === max;
+  }
+  
+  // Initialize carousel
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.getElementById('addOnsCarousel');
+    if (carousel) {
+      const items = carousel.querySelectorAll('.add-on-card');
+      const maxSlide = Math.max(0, items.length - itemsPerView);
+      updateArrowStates(0, maxSlide);
+    }
+  });
+  
+  // Make slideAddOns globally accessible
+  window.slideAddOns = slideAddOns;
+  
   // Fix for add-on product forms being disabled by main product variant changes
   class AddOnFormProtector {
     constructor() {
