@@ -25,27 +25,29 @@
           </a>
           
           {% comment %} Add to Cart Form {% endcomment %}
-          <product-form-component 
-            class="product-form"
-            data-product-id="{{ add_on.id }}"
-            data-quantity-default="1"
-          >
-            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-2" on:submit="/handleSubmit">
-              <input type="hidden" name="id" value="{{ add_on.selected_or_first_available_variant.id }}" ref="variantId">
-              <input type="hidden" name="quantity" value="1">
-              
-              {% render 'add-to-cart-button',
-                id: 'AddToCart-' | append: add_on.id,
-                class: 'add-on-button',
-                can_add_to_cart: add_on.available,
-                product: add_on,
-                add_to_cart_text: block.settings.button_text
-              %}
-              
-              <!-- Live region for screen readers -->
-              <div ref="liveRegion" aria-live="polite" aria-atomic="true" class="sr-only"></div>
-            </form>
-          </product-form-component>
+          <div class="add-on-product-form" data-add-on-id="{{ add_on.id }}">
+            <product-form-component 
+              class="product-form add-on-form"
+              data-product-id="{{ add_on.id }}"
+              data-quantity-default="1"
+            >
+              <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-2" on:submit="/handleSubmit">
+                <input type="hidden" name="id" value="{{ add_on.selected_or_first_available_variant.id }}" ref="variantId">
+                <input type="hidden" name="quantity" value="1">
+                
+                {% render 'add-to-cart-button',
+                  id: 'AddToCart-' | append: add_on.id,
+                  class: 'add-on-button',
+                  can_add_to_cart: add_on.available,
+                  product: add_on,
+                  add_to_cart_text: block.settings.button_text
+                %}
+                
+                <!-- Live region for screen readers -->
+                <div ref="liveRegion" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+              </form>
+            </product-form-component>
+          </div>
         </div>
       {% endfor %}
     </div>
@@ -80,7 +82,71 @@
   width: 100%;
 }
 
+/* Ensure add-on forms maintain their state */
+.add-on-form button[disabled] {
+  pointer-events: none;
+}
+
 {% endstylesheet %}
+
+<script type="module">
+  // Fix for add-on product forms being disabled by main product variant changes
+  class AddOnFormProtector {
+    constructor() {
+      this.protectAddOnForms();
+    }
+    
+    protectAddOnForms() {
+      // Wait for DOM content to be loaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => this.init());
+      } else {
+        this.init();
+      }
+    }
+    
+    init() {
+      const addOnForms = document.querySelectorAll('.add-on-form');
+      
+      addOnForms.forEach(form => {
+        // Store initial state
+        const button = form.querySelector('button[type="submit"]');
+        if (button) {
+          const initialDisabled = button.disabled;
+          const initialText = button.textContent;
+          
+          // Override the disable method to prevent external disabling
+          const originalDisable = form.disable?.bind(form);
+          if (originalDisable) {
+            form.disable = function() {
+              // Don't disable add-on forms from variant updates
+              return;
+            };
+          }
+          
+          // Ensure button stays enabled for available products
+          const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              if (mutation.type === 'attributes' && mutation.attributeName === 'disabled') {
+                const target = mutation.target;
+                if (target.tagName === 'BUTTON' && target.type === 'submit' && !initialDisabled) {
+                  // Re-enable if it was disabled externally
+                  setTimeout(() => {
+                    target.disabled = false;
+                  }, 0);
+                }
+              }
+            });
+          });
+          
+          observer.observe(button, { attributes: true });
+        }
+      });
+    }
+  }
+  
+  new AddOnFormProtector();
+</script>
 
 {% schema %}
 {
