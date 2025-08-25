@@ -6,7 +6,7 @@
   
   <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
     <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
-    <div class="flex flex-row flex-wrap gap-4">
+    <div class="add-ons-carousel">
       {% for add_on in product.metafields.custom.add_ons.value %}
         <div class="add-on-card" style="min-width: 200px; max-width: 300px;">
           <a href="{{ add_on.url }}" class="block">
@@ -54,19 +54,50 @@
 
 {% stylesheet %}
 
+.product-add-ons {
+  overflow: hidden;
+}
+
+.add-ons-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.add-ons-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.add-ons-carousel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.add-ons-carousel::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.add-ons-carousel::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
 .add-on-card {
   display: flex; 
   flex-direction: row; 
   width: 200px;
-
+  flex-shrink: 0;
+  scroll-snap-align: start;
 }
+
 .add-on-image {
   width: 100px; 
   height: 100px; 
   object-fit: cover;
-}
-.add-on-button {
-
 }
 
 {% endstylesheet %}
