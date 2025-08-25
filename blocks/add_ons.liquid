@@ -7,7 +7,7 @@
   <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
     <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
     <div class="add-ons-carousel">
-      {% for add_on in product.metafields.custom.add_ons.value %}
+      {% for add_on in product.metafields.custom.add_ons.value limit: 1 %}
         <div class="add-on-card">
           <a href="{{ add_on.url }}" class="block">
             <img 
@@ -36,7 +36,7 @@
               
               {% render 'add-to-cart-button',
                 id: 'AddToCart-' | append: add_on.id,
-                class: 'add-on-button',
+                class: 'add-on-button button-small',
                 can_add_to_cart: add_on.available,
                 product: add_on,
                 add_to_cart_text: block.settings.button_text
@@ -55,7 +55,8 @@
 {% stylesheet %}
 
 .product-add-ons {
-  overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 .add-ons-carousel {
@@ -68,6 +69,7 @@
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
   white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 .add-ons-carousel::-webkit-scrollbar {
@@ -100,6 +102,22 @@
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.add-on-card .product-form {
+  position: relative;
+  z-index: 3;
+}
+
+.add-on-card .add-on-button {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .add-on-image {
