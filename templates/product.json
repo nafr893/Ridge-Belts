@@ -44,7 +44,7 @@
           "static": true,
           "settings": {
             "width": "custom",
-            "custom_width": 40,
+            "custom_width": 50,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -449,7 +449,7 @@
         "desktop_media_position": "left",
         "equal_columns": false,
         "limit_details_width": true,
-        "gap": 48,
+        "gap": 24,
         "color_scheme": "",
         "padding-block-start": 0,
         "padding-block-end": 0
