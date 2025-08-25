@@ -39,7 +39,7 @@
                 class: 'add-on-button',
                 can_add_to_cart: add_on.available,
                 product: add_on,
-                add_to_cart_text: +
+                add_to_cart_text: block.settings.button_text
               %}
               
               <!-- Live region for screen readers -->
@@ -114,7 +114,7 @@
       "type": "text",
       "id": "button_text",
       "label": "Add to Cart Button Text",
-      "default": "Add to Cart"
+      "default": "+"
     },
     {
       "type": "checkbox",
