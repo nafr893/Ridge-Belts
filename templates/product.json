@@ -227,7 +227,7 @@
               "type": "add_ons",
               "name": "Product Add-ons",
               "settings": {
-                "heading": "Add-ons",
+                "heading": "Customize",
                 "columns": "1",
                 "addon_button_text": "ADD",
                 "show_price": true,
