@@ -35,13 +35,16 @@
                 <input type="hidden" name="id" value="{{ add_on.selected_or_first_available_variant.id }}" ref="variantId">
                 <input type="hidden" name="quantity" value="1">
                 
-                {% render 'add-to-cart-button',
-                  id: 'AddToCart-' | append: add_on.id,
-                  class: 'add-on-button',
-                  can_add_to_cart: add_on.available,
-                  product: add_on,
-                  add_to_cart_text: block.settings.addon_button_text
-                %}
+                <!-- Debug: {{ block.settings.addon_button_text }} -->
+                <button
+                  id="AddToCart-{{ add_on.id }}"
+                  type="submit"
+                  name="add"
+                  class="button add-on-button"
+                  {% unless add_on.available %}disabled{% endunless %}
+                >
+                  {{ block.settings.addon_button_text | default: "+" }}
+                </button>
                 
                 <!-- Live region for screen readers -->
                 <div ref="liveRegion" aria-live="polite" aria-atomic="true" class="sr-only"></div>
