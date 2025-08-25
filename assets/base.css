@@ -3628,6 +3628,7 @@ slideshow-component[autoplay] slideshow-controls {
   max-height: 100%;
   overflow-x: scroll;
   scrollbar-width: none;
+  margin: 0; 
 }
 
 .slideshow-controls__thumbnails {
