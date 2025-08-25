@@ -144,15 +144,16 @@ place-self: center;
 }
 
 .add-on-card {
-border: 1px solid rgb(224, 224, 224);
+border: none;
 display: flex;
 align-items: center;
 justify-content: space-between; 
 height: 130px;
 flex-direction: row;
 border-radius: 8px;
-padding: 0.5rem;
-flex: 0 0 calc(50% - 0.5rem);
+padding: 0;
+background: #EDEDED;
+flex: 0 0 100%; /* Show 1 item at a time on both desktop and mobile */
 position: relative;
 z-index: 1;
 min-width: 200px;
@@ -200,7 +201,7 @@ object-fit: cover;
 <script type="module">
   // Carousel functionality for add-ons
   let currentSlide = 0;
-  const itemsPerView = window.innerWidth <= 768 ? 1 : 2; // Show 1 item on mobile, 2 on desktop
+  const itemsPerView = 1; // Show 1 item at a time on both desktop and mobile
   
   function slideAddOns(direction) {
     const carousel = document.getElementById('addOnsCarousel');
