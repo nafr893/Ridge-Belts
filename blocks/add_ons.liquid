@@ -42,13 +42,10 @@
     
     // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
-      const arrows = document.querySelectorAll('.slideshow-arrow');
-      
-      if (totalSlides > 1) {
-        // Show arrows if there are multiple slides
-        arrows.forEach(arrow => arrow.classList.add('show'));
+      if (totalSlides <= 1) {
+        const arrows = document.querySelectorAll('.slideshow-arrow');
+        arrows.forEach(arrow => arrow.style.display = 'none');
       }
-      // If totalSlides <= 1, arrows remain hidden by default
     });
   </script>
   
@@ -161,16 +158,12 @@
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
   z-index: 10;
-}
-
-.slideshow-arrow.show {
-  display: flex;
 }
 
 .slideshow-arrow:hover {
