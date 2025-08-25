@@ -229,7 +229,6 @@
               "settings": {
                 "heading": "Add-ons",
                 "columns": "1",
-                "button_text": "ADD",
                 "show_price": true,
                 "padding_top": 0,
                 "padding_bottom": 24
