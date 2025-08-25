@@ -36,7 +36,7 @@
               
               {% render 'add-to-cart-button',
                 id: 'AddToCart-' | append: add_on.id,
-                class: 'w-full button-secondary',
+                class: 'add-on-button',
                 can_add_to_cart: add_on.available,
                 product: add_on,
                 add_to_cart_text: block.settings.button_text
@@ -56,13 +56,20 @@
 
 .add-on-card {
   display: flex; 
-  flex-direction: column; 
+  flex-direction: row; 
+  width: 200px;
 
 }
 .add-on-image {
   width: 100px; 
   height: 100px; 
   object-fit: cover;
+}
+.add-on-button {
+  border: none; 
+  background: none;
+  padding: 0
+  
 }
 
 {% endstylesheet %}
