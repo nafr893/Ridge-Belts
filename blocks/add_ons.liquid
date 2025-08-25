@@ -6,9 +6,9 @@
   
   <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
     <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
-    <div class="grid grid-cols-{{ block.settings.columns | default: 2 }} gap-4">
+    <div class="flex flex-row flex-wrap gap-4">
       {% for add_on in product.metafields.custom.add_ons.value %}
-        <div class="border rounded-lg p-2 hover:shadow">
+        <div class="border rounded-lg p-2 hover:shadow flex-shrink-0" style="min-width: 200px; max-width: 300px;">
           <a href="{{ add_on.url }}" class="block">
             <img 
               src="{{ add_on.featured_image | image_url: width: 300 }}" 
