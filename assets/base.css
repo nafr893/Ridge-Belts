@@ -3638,7 +3638,7 @@ slideshow-component[autoplay] slideshow-controls {
   gap: var(--gap-xs);
   margin-inline: auto;
   height: fit-content;
-  
+  margin: 0;
 
   .slideshow-control {
     border-radius: var(--media-radius);
