@@ -40,7 +40,7 @@
                   class: 'add-on-button',
                   can_add_to_cart: add_on.available,
                   product: add_on,
-                  add_to_cart_text: block.settings.button_text
+                  add_to_cart_text: block.settings.addon_button_text
                 %}
                 
                 <!-- Live region for screen readers -->
@@ -106,20 +106,22 @@
     }
     
     init() {
-      // Only target add-on forms specifically (not main product forms)
-      const addOnForms = document.querySelectorAll('.add-on-product-form .add-on-form');
+      // Only target add-on forms specifically - be very precise with selectors
+      const addOnForms = document.querySelectorAll('.add-on-product-form[data-add-on-id] .add-on-form');
       
       addOnForms.forEach(form => {
         // Store initial state
-        const button = form.querySelector('button[type="submit"]');
+        const button = form.querySelector('button[type="submit"].add-on-button');
         if (button) {
           const initialDisabled = button.disabled;
+          const addOnId = form.closest('[data-add-on-id]').dataset.addOnId;
           
           // Override the disable method to prevent external disabling for add-on forms only
           const originalDisable = form.disable?.bind(form);
           if (originalDisable) {
             form.disable = function() {
               // Don't disable add-on forms from variant updates
+              console.log(`Blocked disable attempt on add-on form for product ${addOnId}`);
               return;
             };
           }
@@ -132,9 +134,11 @@
                 // Only protect buttons inside add-on forms that were initially available
                 if (target.tagName === 'BUTTON' && 
                     target.type === 'submit' && 
+                    target.classList.contains('add-on-button') &&
                     !initialDisabled &&
-                    target.closest('.add-on-product-form')) {
+                    target.closest('.add-on-product-form[data-add-on-id]')) {
                   // Re-enable if it was disabled externally
+                  console.log(`Re-enabling add-on button for product ${addOnId}`);
                   setTimeout(() => {
                     target.disabled = false;
                   }, 0);
@@ -193,8 +197,8 @@
     },
     {
       "type": "text",
-      "id": "button_text",
-      "label": "Add to Cart Button Text",
+      "id": "addon_button_text",
+      "label": "Add-on Button Text",
       "default": "ADD TO CART"
     },
     {
