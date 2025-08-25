@@ -140,7 +140,7 @@ place-self: center;
 .add-ons-carousel {
   display: flex;
   transition: transform 0.3s ease;
-  gap: 1rem;
+  gap: 0; /* Remove gap to prevent cutting off */
 }
 
 .add-on-card {
@@ -152,9 +152,9 @@ height: 130px;
 flex-direction: row;
 border-radius: 0px;
 padding-right: 1rem;
-
+margin-right: 1rem; /* Add margin instead of gap for proper spacing */
 background: #EDEDED;
-flex: 0 0 100%; /* Show 1 item at a time on both desktop and mobile */
+flex: 0 0 calc(100% - 1rem); /* Account for margin in width calculation */
 position: relative;
 z-index: 1;
 min-width: 200px;
@@ -218,7 +218,8 @@ object-fit: cover;
       currentSlide = Math.max(currentSlide - 1, 0);
     }
     
-    const translateX = -(currentSlide * (100 / itemsPerView));
+    // Calculate translation based on item width including margin
+    const translateX = -(currentSlide * 100);
     carousel.style.transform = `translateX(${translateX}%)`;
     
     // Update arrow states
