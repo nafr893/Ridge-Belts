@@ -228,7 +228,7 @@
               "name": "Product Add-ons",
               "settings": {
                 "heading": "Add-ons",
-                "columns": "2",
+                "columns": "1",
                 "button_text": "+",
                 "show_price": true,
                 "padding_top": 0,
