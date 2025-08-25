@@ -42,10 +42,13 @@
     
     // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
-      if (totalSlides <= 1) {
-        const arrows = document.querySelectorAll('.slideshow-arrow');
-        arrows.forEach(arrow => arrow.style.display = 'none');
+      const arrows = document.querySelectorAll('.slideshow-arrow');
+      
+      if (totalSlides > 1) {
+        // Show arrows if there are multiple slides
+        arrows.forEach(arrow => arrow.classList.add('show'));
       }
+      // If totalSlides <= 1, arrows remain hidden by default
     });
   </script>
   
@@ -142,7 +145,7 @@
 .slideshow-track {
   display: flex;
   transition: transform 0.3s ease;
-  width: 400px;
+  width: 100%;
 }
 
 .add-on-slide {
@@ -164,6 +167,13 @@
   cursor: pointer;
   transition: all 0.2s ease;
   z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.slideshow-arrow.show {
+  opacity: 1;
+  visibility: visible;
 }
 
 .slideshow-arrow:hover {
