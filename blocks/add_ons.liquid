@@ -8,7 +8,7 @@
     <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
     <div class="add-ons-carousel">
       {% for add_on in product.metafields.custom.add_ons.value %}
-        <div class="add-on-card" style="min-width: 200px; max-width: 300px;">
+        <div class="add-on-card">
           <a href="{{ add_on.url }}" class="block">
             <img 
               src="{{ add_on.featured_image | image_url: width: 150 }}" 
@@ -61,11 +61,13 @@
 .add-ons-carousel {
   display: flex;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-behavior: smooth;
   gap: 1rem;
   padding-bottom: 10px;
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
+  white-space: nowrap;
 }
 
 .add-ons-carousel::-webkit-scrollbar {
@@ -88,16 +90,23 @@
 
 .add-on-card {
   display: flex; 
-  flex-direction: row; 
+  flex-direction: column; 
   width: 200px;
+  min-width: 200px;
+  max-width: 200px;
   flex-shrink: 0;
   scroll-snap-align: start;
+  white-space: normal;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.5rem;
 }
 
 .add-on-image {
-  width: 100px; 
-  height: 100px; 
+  width: 100%;
+  height: 120px; 
   object-fit: cover;
+  border-radius: 4px;
 }
 
 {% endstylesheet %}
