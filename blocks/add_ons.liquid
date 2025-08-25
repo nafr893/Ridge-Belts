@@ -106,16 +106,16 @@
     }
     
     init() {
-      const addOnForms = document.querySelectorAll('.add-on-form');
+      // Only target add-on forms specifically (not main product forms)
+      const addOnForms = document.querySelectorAll('.add-on-product-form .add-on-form');
       
       addOnForms.forEach(form => {
         // Store initial state
         const button = form.querySelector('button[type="submit"]');
         if (button) {
           const initialDisabled = button.disabled;
-          const initialText = button.textContent;
           
-          // Override the disable method to prevent external disabling
+          // Override the disable method to prevent external disabling for add-on forms only
           const originalDisable = form.disable?.bind(form);
           if (originalDisable) {
             form.disable = function() {
@@ -124,12 +124,16 @@
             };
           }
           
-          // Ensure button stays enabled for available products
+          // Monitor for external changes and protect only add-on buttons
           const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
               if (mutation.type === 'attributes' && mutation.attributeName === 'disabled') {
                 const target = mutation.target;
-                if (target.tagName === 'BUTTON' && target.type === 'submit' && !initialDisabled) {
+                // Only protect buttons inside add-on forms that were initially available
+                if (target.tagName === 'BUTTON' && 
+                    target.type === 'submit' && 
+                    !initialDisabled &&
+                    target.closest('.add-on-product-form')) {
                   // Re-enable if it was disabled externally
                   setTimeout(() => {
                     target.disabled = false;
