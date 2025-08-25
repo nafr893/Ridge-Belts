@@ -229,6 +229,7 @@
           class: 'desktop:hidden media-gallery__mobile-controls',
           style: block.settings.slideshow_mobile_controls_style,
           item_count: item_count,
+          thumbnails: combined_media,
           controls_on_media: true,
           pagination_position: 'center',
         -%}
@@ -790,6 +791,10 @@
         {
           "value": "counter",
           "label": "t:options.counter"
+        },
+        {
+          "value": "thumbnails",
+          "label": "t:options.thumbnails"
         },
         {
           "value": "hint",
