@@ -4,11 +4,68 @@
     type="module"
   ></script>
   
+  <script>
+    let currentSlide = 0;
+    const totalSlides = {{ product.metafields.custom.add_ons.value.size | default: 0 }};
+    
+    function changeSlide(direction) {
+      const track = document.getElementById('addOnsTrack');
+      const prevBtn = document.querySelector('.slideshow-arrow--prev');
+      const nextBtn = document.querySelector('.slideshow-arrow--next');
+      
+      if (!track) return;
+      
+      currentSlide += direction;
+      
+      // Loop around if at ends
+      if (currentSlide < 0) {
+        currentSlide = totalSlides - 1;
+      } else if (currentSlide >= totalSlides) {
+        currentSlide = 0;
+      }
+      
+      // Apply transform
+      const translateX = -currentSlide * 100;
+      track.style.transform = `translateX(${translateX}%)`;
+      
+      // Update button states
+      if (prevBtn && nextBtn) {
+        prevBtn.disabled = false;
+        nextBtn.disabled = false;
+        
+        if (totalSlides <= 1) {
+          prevBtn.disabled = true;
+          nextBtn.disabled = true;
+        }
+      }
+    }
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', function() {
+      if (totalSlides <= 1) {
+        const arrows = document.querySelectorAll('.slideshow-arrow');
+        arrows.forEach(arrow => arrow.style.display = 'none');
+      }
+    });
+  </script>
+  
   <div class="product-add-ons" style="padding-top: {{ block.settings.padding_top }}px; padding-bottom: {{ block.settings.padding_bottom }}px;">
     <h3 class="text-lg font-semibold mb-2">{{ block.settings.heading | default: "Add-ons" }}</h3>
-    <div class="add-ons-carousel">
-      {% for add_on in product.metafields.custom.add_ons.value limit: 2 %}
-        <div class="add-on-card">
+    
+    <div class="add-ons-slideshow">
+      <!-- Previous Arrow -->
+      <button class="slideshow-arrow slideshow-arrow--prev" onclick="changeSlide(-1)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M10 3l-5 5 5 5V3z"/>
+        </svg>
+      </button>
+      
+      <!-- Slideshow Container -->
+      <div class="slideshow-container">
+        <div class="slideshow-track" id="addOnsTrack">
+          {% for add_on in product.metafields.custom.add_ons.value %}
+            <div class="add-on-slide">
+              <div class="add-on-card">
           <a href="{{ add_on.url }}" class="block">
             <img 
               src="{{ add_on.featured_image | image_url: width: 150 }}" 
@@ -46,8 +103,18 @@
               <div ref="liveRegion" aria-live="polite" aria-atomic="true" class="sr-only"></div>
             </form>
           </product-form-component>
+              </div>
+            </div>
+          {% endfor %}
         </div>
-      {% endfor %}
+      </div>
+      
+      <!-- Next Arrow -->
+      <button class="slideshow-arrow slideshow-arrow--next" onclick="changeSlide(1)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M6 3l5 5-5 5V3z"/>
+        </svg>
+      </button>
     </div>
   </div>
 {% endif %}
@@ -59,51 +126,67 @@
   z-index: 1;
 }
 
-.add-ons-carousel {
+.add-ons-slideshow {
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
+  align-items: center;
   gap: 1rem;
-  padding-bottom: 10px;
-  scrollbar-width: thin;
-  scrollbar-color: #ccc transparent;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 
-.add-ons-carousel::-webkit-scrollbar {
-  height: 8px;
+.slideshow-container {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
-.add-ons-carousel::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
+.slideshow-track {
+  display: flex;
+  transition: transform 0.3s ease;
+  width: 100%;
 }
 
-.add-ons-carousel::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
+.add-on-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
 }
 
-.add-ons-carousel::-webkit-scrollbar-thumb:hover {
-  background: #999;
+.slideshow-arrow {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.slideshow-arrow:hover {
+  background: #e8e8e8;
+  border-color: #bbb;
+}
+
+.slideshow-arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .add-on-card {
   display: flex; 
   flex-direction: column; 
-  width: 200px;
-  min-width: 200px;
-  max-width: 200px;
-  flex-shrink: 0;
-  scroll-snap-align: start;
-  white-space: normal;
+  width: 280px;
+  max-width: 90%;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 0.5rem;
+  padding: 1rem;
   position: relative;
   z-index: 2;
+  background: white;
 }
 
 .add-on-card .product-form {
@@ -122,9 +205,10 @@
 
 .add-on-image {
   width: 100%;
-  height: 120px; 
+  height: 180px; 
   object-fit: cover;
   border-radius: 4px;
+  margin-bottom: 0.5rem;
 }
 
 {% endstylesheet %}
