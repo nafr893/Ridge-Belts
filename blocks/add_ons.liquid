@@ -34,10 +34,13 @@
                 height="150"
                 loading="lazy"
               >
+              <div class="add-on-info">
               <p class="mt-2 text-sm font-medium">{{ add_on.title }}</p>
               {% if block.settings.show_price and add_on.price %}
                 <p class="text-sm text-gray-600">{{ add_on.price | money }}</p>
+            
               {% endif %}
+                  </div>
             </a>
             
             {% comment %} Add to Cart Form {% endcomment %}
