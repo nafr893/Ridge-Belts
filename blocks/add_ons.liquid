@@ -157,9 +157,8 @@ height: 130px;
 flex-direction: row;
 border-radius: 0px;
 padding-right: 1rem;
-margin-right: 1rem; /* Add margin instead of gap for proper spacing */
 background: #EDEDED;
-flex: 0 0 calc(100% - 1rem); /* Account for margin in width calculation */
+flex: 0 0 100%; /* Each card takes exactly 100% width */
 position: relative;
 z-index: 1;
 min-width: 200px;
@@ -190,7 +189,7 @@ object-fit: cover;
 /* Responsive design */
 @media (max-width: 768px) {
   .add-on-card {
-    flex: 0 0 100%; /* Show 1 item at a time on mobile */
+    flex: 0 0 100%; /* Show 1 item at a time on mobile - same as desktop now */
   }
   
   .add-ons-header {
