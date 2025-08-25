@@ -161,19 +161,16 @@
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
   z-index: 10;
-  opacity: 0;
-  visibility: hidden;
 }
 
 .slideshow-arrow.show {
-  opacity: 1;
-  visibility: visible;
+  display: flex;
 }
 
 .slideshow-arrow:hover {
