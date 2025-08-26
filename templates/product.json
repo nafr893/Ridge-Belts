@@ -228,7 +228,7 @@
               "type": "add_ons",
               "name": "Product Add-ons",
               "settings": {
-                "heading": "ADD ONS",
+                "heading": "PAIR WITH",
                 "columns": "1",
                 "addon_button_text": "ADD",
                 "show_price": true,
