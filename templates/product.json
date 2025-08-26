@@ -1387,9 +1387,9 @@
           "settings": {
             "image": "shopify://shop_images/BRONW162.jpg",
             "link": "",
-            "image_ratio": "adapt",
+            "image_ratio": "landscape",
             "width": "custom",
-            "custom_width": 55,
+            "custom_width": 100,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -1532,7 +1532,7 @@
       ],
       "name": "t:names.email_signup",
       "settings": {
-        "content_direction": "row",
+        "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
