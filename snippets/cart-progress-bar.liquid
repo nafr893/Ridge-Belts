@@ -1,7 +1,7 @@
 
 
 {%- liquid
-  assign free_shipping_threshold = settings.free_shipping_amount | default: 20000
+  assign free_shipping_threshold = settings.free_shipping_amount | default: 14900
   assign cart_total = cart.total_price
   assign progress_percent = cart_total | times: 100 | divided_by: free_shipping_threshold
   assign remaining_amount = free_shipping_threshold | minus: cart_total
