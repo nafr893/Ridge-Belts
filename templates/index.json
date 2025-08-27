@@ -126,31 +126,32 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "button_PM9MPU": {
-                  "type": "button",
-                  "settings": {
-                    "label": "Shop now",
-                    "link": "shopify://collections/all",
-                    "open_in_new_tab": false,
-                    "style_class": "button",
-                    "width": "fit-content",
-                    "custom_width": 100,
-                    "width_mobile": "fit-content",
-                    "custom_width_mobile": 100
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
                 "text_Q7rMxA",
-                "text_ya3e3A",
-                "button_PM9MPU"
+                "text_ya3e3A"
               ]
+            },
+            "button_wckema": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "Shop now",
+                "link": "shopify://collections/all",
+                "open_in_new_tab": false,
+                "style_class": "button",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "group_y8tKR8"
+            "group_y8tKR8",
+            "button_wckema"
           ]
         },
         "slide_PqfbtP": {
@@ -267,38 +268,39 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "button_nNwBPb": {
-                  "type": "button",
-                  "settings": {
-                    "label": "Shop now",
-                    "link": "shopify://collections/all",
-                    "open_in_new_tab": false,
-                    "style_class": "button",
-                    "width": "fit-content",
-                    "custom_width": 100,
-                    "width_mobile": "fit-content",
-                    "custom_width_mobile": 100
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
                 "text_mMgwBL",
-                "text_XfxGVY",
-                "button_nNwBPb"
+                "text_XfxGVY"
               ]
+            },
+            "button_KpfLGN": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "Shop now",
+                "link": "shopify://collections/all",
+                "open_in_new_tab": false,
+                "style_class": "button",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "group_RAJenk"
+            "group_RAJenk",
+            "button_KpfLGN"
           ]
         },
-        "slide_7A8APC": {
+        "slide_Y6G89Q": {
           "type": "_slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/Screenshot_2024-12-05_at_8.50.02_PM_6869e342-7b55-4901-b17b-ebfa4219da97.png",
+            "image_1": "shopify://shop_images/DSC00694.jpg",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
@@ -319,7 +321,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "group_kFTUHG": {
+            "group_V4tw8F": {
               "type": "group",
               "settings": {
                 "link": "",
@@ -339,7 +341,7 @@
                 "height": "fit",
                 "custom_height": 100,
                 "inherit_color_scheme": false,
-                "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+                "color_scheme": "scheme-6",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -358,10 +360,10 @@
                 "padding-inline-end": 48
               },
               "blocks": {
-                "text_QCwAPa": {
+                "text_KPwKxh": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>GO STRAPS</h2>",
+                    "text": "<h2>DUFFEL BAGS</h2>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -376,14 +378,14 @@
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
-                    "padding-block-start": 46,
-                    "padding-block-end": 46,
-                    "padding-inline-start": 46,
-                    "padding-inline-end": 46
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
-                "text_GNmPMX": {
+                "text_ywPMjG": {
                   "type": "text",
                   "disabled": true,
                   "settings": {
@@ -408,40 +410,40 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "button_BnEzCd": {
-                  "type": "button",
-                  "settings": {
-                    "label": "Shop now",
-                    "link": "shopify://collections/all",
-                    "open_in_new_tab": false,
-                    "style_class": "button",
-                    "width": "fit-content",
-                    "custom_width": 100,
-                    "width_mobile": "fit-content",
-                    "custom_width_mobile": 100
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
-                "text_QCwAPa",
-                "text_GNmPMX",
-                "button_BnEzCd"
+                "text_KPwKxh",
+                "text_ywPMjG"
               ]
+            },
+            "button_3nxcqe": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "Shop now",
+                "link": "shopify://collections/all",
+                "open_in_new_tab": false,
+                "style_class": "button",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "group_kFTUHG"
+            "group_V4tw8F",
+            "button_3nxcqe"
           ]
         }
       },
       "block_order": [
         "slide_EUCyzM",
         "slide_PqfbtP",
-        "slide_7A8APC"
+        "slide_Y6G89Q"
       ],
-      "disabled": true,
       "name": "t:names.slideshow",
       "settings": {
         "icons_style": "arrows_large",
