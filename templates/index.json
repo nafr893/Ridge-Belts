@@ -526,6 +526,7 @@
                 },
                 "text_GNmPMX": {
                   "type": "text",
+                  "disabled": true,
                   "settings": {
                     "text": "<p>Discover the bestsellers that have captured the hearts of our customers with their perfect blend of functionality and style.</p>",
                     "width": "fit-content",
@@ -587,7 +588,7 @@
         "icons_style": "arrows_large",
         "slideshow_controls_style": "dots",
         "color_scheme": "scheme-1",
-        "autoplay": false,
+        "autoplay": true,
         "autoplay_speed": 4,
         "section_width": "full-width",
         "slide_height": "medium",
