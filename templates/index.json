@@ -133,7 +133,7 @@
                     "label": "Shop now",
                     "link": "shopify://collections/all",
                     "open_in_new_tab": false,
-                    "style_class": "button-secondary",
+                    "style_class": "button",
                     "width": "fit-content",
                     "custom_width": 100,
                     "width_mobile": "fit-content",
@@ -220,7 +220,7 @@
                 "text_z6YnmF": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>Bestsellers</h2>",
+                    "text": "<h2>DUFFEL BAGS</h2>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -244,6 +244,7 @@
                 },
                 "text_JDkEff": {
                   "type": "text",
+                  "disabled": true,
                   "settings": {
                     "text": "<p>Discover the bestsellers that have captured the hearts of our customers with their perfect blend of functionality and style.</p>",
                     "width": "fit-content",
@@ -360,7 +361,7 @@
                 "text_mMgwBL": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>Bestsellers</h2>",
+                    "text": "<h2>KNIVES</h2>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
