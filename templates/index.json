@@ -385,6 +385,7 @@
                 },
                 "text_XfxGVY": {
                   "type": "text",
+                  "disabled": true,
                   "settings": {
                     "text": "<p>Discover the bestsellers that have captured the hearts of our customers with their perfect blend of functionality and style.</p>",
                     "width": "fit-content",
@@ -501,7 +502,7 @@
                 "text_QCwAPa": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>Bestsellers</h2>",
+                    "text": "<h2>GO STRAPS</h2>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
