@@ -120,6 +120,7 @@
       {% when 'video', 'external_video' %}
         {%- render 'video',
           video: media,
+          video_autoplay: false,
           video_loop: block.settings.video_loop,
           widths: widths,
           sizes: sizes,
