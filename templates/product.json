@@ -978,7 +978,7 @@
                     "text": "<p>{{ closest.product.metafields.custom.benefit_description_1 | metafield_tag }}</p>",
                     "width": "100%",
                     "max_width": "normal",
-                    "alignment": "center",
+                    "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
                     "font_size": "1rem",
