@@ -127,7 +127,7 @@
 
 {% if video != blank %}
   {% unless video_autoplay %}
-    <!-- Direct video loading for product media when autoplay is disabled -->
+    <!-- Direct video loading when autoplay is disabled for better UX -->
     <div
       class="{{ video_class }}"
       style="{{ video_style }}"
