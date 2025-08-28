@@ -889,7 +889,7 @@
                 "image": "{{ closest.product.metafields.custom.benefit_image_1.value }}",
                 "link": "",
                 "image_ratio": "adapt",
-                "width": "custom",
+                "width": "fill",
                 "custom_width": 60,
                 "width_mobile": "fill",
                 "custom_width_mobile": 100,
