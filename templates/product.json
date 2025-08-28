@@ -976,9 +976,9 @@
                   "name": "t:names.text",
                   "settings": {
                     "text": "<p>{{ closest.product.metafields.custom.benefit_description_1 | metafield_tag }}</p>",
-                    "width": "fit-content",
+                    "width": "100%",
                     "max_width": "normal",
-                    "alignment": "left",
+                    "alignment": "center",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
                     "font_size": "1rem",
