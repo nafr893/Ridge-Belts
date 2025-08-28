@@ -40,7 +40,6 @@
   assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
 %}
 
-
 {% if video_from_url %}
   {% liquid
     if video_type == 'youtube'
@@ -52,8 +51,6 @@
 
       if video_autoplay
         assign video_src = video_src | append: '&autoplay=1&mute=1'
-      else
-        assign video_src = video_src | append: '&autoplay=0&mute=0'
       endif
 
       if video_loop
@@ -73,8 +70,6 @@
 
       if video_autoplay
         assign video_src = video_src | append: '&autoplay=1&muted=1'
-      else
-        assign video_src = video_src | append: '&autoplay=0&muted=0'
       endif
       if video_loop
         assign video_src = video_src | append: '&loop=1'
@@ -110,31 +105,22 @@
     {% if video.host == 'youtube' %}
       {{
         video
-        | external_video_url: autoplay: false, loop: video_loop, playlist: video.external_id, mute: '0', controls: controls, enablejsapi: enable_js_api
+        | external_video_url: autoplay: true, loop: video_loop, playlist: video.external_id, mute: '1', controls: controls, enablejsapi: enable_js_api
         | external_video_tag: data-video-type: 'youtube'
       }}
     {% elsif video.host == 'vimeo' %}
       {{
         video
-        | external_video_url: autoplay: false, loop: video_loop, muted: '0', controls: controls, api: enable_js_api
+        | external_video_url: autoplay: true, loop: video_loop, muted: '1', controls: controls, api: enable_js_api
         | external_video_tag: data-video-type: 'vimeo'
       }}
     {% else %}
-      {{ video | video_tag: image_size: '2500x', autoplay: false, loop: video_loop, muted: false, controls: controls }}
+      {{ video | video_tag: image_size: '2500x', autoplay: true, loop: video_loop, muted: true, controls: controls }}
     {% endif %}
   {% endcapture %}
 {% endif %}
 
 {% if video != blank %}
-<<<<<<< HEAD
-  {% unless video_autoplay %}
-    <!-- Direct video loading when autoplay is disabled for better UX -->
-    <div
-      class="{{ video_class }}"
-      style="{{ video_style }}"
-      {{ additional_attributes }}
-    >
-=======
   <deferred-media
     class="{{ video_class }}"
     style="{{ video_style }}"
@@ -184,7 +170,6 @@
     {% endif %}
 
     <template>
->>>>>>> f922ee9 (revert  back)
       {% if video_from_url %}
         {{ video_iframe }}
       {% else %}
