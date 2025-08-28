@@ -950,9 +950,9 @@
                   "name": "t:names.heading",
                   "settings": {
                     "text": "<h2>{{ closest.product.metafields.custom.benefit_title_1.value }}</h2>",
-                    "width": "fit-content",
+                    "width": "100%",
                     "max_width": "normal",
-                    "alignment": "left",
+                    "alignment": "center",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
                     "font_size": "1rem",
