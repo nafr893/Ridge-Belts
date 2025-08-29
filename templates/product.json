@@ -893,7 +893,7 @@
                 "custom_width": 60,
                 "width_mobile": "fill",
                 "custom_width_mobile": 100,
-                "height": "fit",
+                "height": "fill",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
