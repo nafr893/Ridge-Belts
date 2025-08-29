@@ -952,7 +952,7 @@
                     "text": "<h3>{{ closest.product.metafields.custom.benefit_title_1.value }}</h3>",
                     "width": "100%",
                     "max_width": "normal",
-                    "alignment": "left",
+                    "alignment": "center",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
                     "font_size": "1rem",
