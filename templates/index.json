@@ -943,7 +943,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Take a look behind the scenes of our latest product launch.</p>",
+                "text": "",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
