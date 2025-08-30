@@ -943,7 +943,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Made with performance and comfort in mind.</p>",
+                "text": "<p>Made with performance and comfort in mind. </p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
