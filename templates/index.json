@@ -969,13 +969,13 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Discover MTN LITE",
+                "label": "A NEW ERA OF BELTS",
                 "link": "shopify://collections/mtn-lite",
                 "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
+                "style_class": "button",
+                "width": "custom",
                 "custom_width": 100,
-                "width_mobile": "fit-content",
+                "width_mobile": "custom",
                 "custom_width_mobile": 100
               },
               "blocks": {}
