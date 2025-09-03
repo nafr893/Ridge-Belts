@@ -587,7 +587,6 @@
         "slide_Y6G89Q",
         "slide_fKem94"
       ],
-      "disabled": true,
       "name": "t:names.slideshow",
       "settings": {
         "icons_style": "arrows_large",
@@ -650,6 +649,7 @@
         "text_YLPk4p",
         "button_H9gpTf"
       ],
+      "disabled": true,
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "video",
