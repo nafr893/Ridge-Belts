@@ -608,7 +608,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "",
+            "text": "<p>TWIN PEAKS</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
