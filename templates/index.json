@@ -443,8 +443,9 @@
         "slide_fKem94": {
           "type": "_slide",
           "settings": {
-            "media_type_1": "image",
+            "media_type_1": "video",
             "image_1": "shopify://shop_images/Screenshot_2024-12-05_at_8.50.02_PM_6869e342-7b55-4901-b17b-ebfa4219da97.png",
+            "video_1": "shopify://files/videos/SHEDvidhorizontal.mp4",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
