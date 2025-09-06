@@ -955,7 +955,7 @@
                       "name": "t:names.text",
                       "settings": {
                         "text": "<p><strong>Overall Length</strong></p>",
-                        "width": "fit-content",
+                        "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
                         "type_preset": "rte",
@@ -1111,7 +1111,7 @@
                       "name": "t:names.text",
                       "settings": {
                         "text": "<p><strong>Blade Length</strong></p>",
-                        "width": "fit-content",
+                        "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
                         "type_preset": "rte",
@@ -1267,7 +1267,7 @@
                       "name": "t:names.text",
                       "settings": {
                         "text": "<p><strong>Handle Length</strong></p>",
-                        "width": "fit-content",
+                        "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
                         "type_preset": "rte",
@@ -1423,7 +1423,7 @@
                       "name": "t:names.text",
                       "settings": {
                         "text": "<p><strong>Blade Thickness</strong></p>",
-                        "width": "fit-content",
+                        "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
                         "type_preset": "rte",
@@ -1579,7 +1579,7 @@
                       "name": "t:names.text",
                       "settings": {
                         "text": "<p><strong>Weight</strong></p>",
-                        "width": "fit-content",
+                        "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
                         "type_preset": "rte",
