@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Veterans Day Sale 25% off site wide use code: Veteran",
+            "text": "",
             "link": "shopify://collections/twin-peaks-topographical",
             "font": "var(--font-subheading--family)",
             "font_size": "0.875rem",
