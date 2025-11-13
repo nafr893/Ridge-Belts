@@ -228,19 +228,6 @@
               },
               "blocks": {}
             },
-            "add_ons_YYxkgr": {
-              "type": "add_ons",
-              "name": "Product Add-ons",
-              "settings": {
-                "heading": "PAIR WITH",
-                "columns": "1",
-                "addon_button_text": "ADD",
-                "show_price": true,
-                "padding_top": 0,
-                "padding_bottom": 24
-              },
-              "blocks": {}
-            },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
@@ -275,6 +262,19 @@
                 }
               },
               "block_order": []
+            },
+            "add_ons_YYxkgr": {
+              "type": "add_ons",
+              "name": "Product Add-ons",
+              "settings": {
+                "heading": "PAIR WITH",
+                "columns": "1",
+                "addon_button_text": "ADD",
+                "show_price": true,
+                "padding_top": 0,
+                "padding_bottom": 24
+              },
+              "blocks": {}
             },
             "image_VDWfME": {
               "type": "image",
@@ -440,8 +440,8 @@
           "block_order": [
             "group_icgrde",
             "variant_picker_R3rGDr",
-            "add_ons_YYxkgr",
             "buy_buttons_eYQEYi",
+            "add_ons_YYxkgr",
             "image_VDWfME",
             "text_aEtTtq",
             "custom_liquid_jnmNyA",
@@ -1347,7 +1347,9 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
-            "max_width": 1200
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
           }
         }
       },
