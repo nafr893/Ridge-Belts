@@ -92,7 +92,7 @@
         "media_type_1": "image",
         "image_1": "shopify://shop_images/BlACKfriday12.jpg",
         "media_type_2": "image",
-        "link": "",
+        "link": "shopify://collections/halloween-sale",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
