@@ -127,8 +127,9 @@
       'panel';
 
     @media screen and (min-width: 990px) {
-      /* Products take ~65 %, panel takes ~35 % */
-      grid-template-columns: 65fr 35fr;
+      /* 50/50 split with a gap between the product grid and featured panel */
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
       grid-template-areas:
         'filters filters'
         'products panel';
@@ -155,22 +156,9 @@
   /* ── Featured panel ────────────────────────────────────── */
   .cwf__panel {
     grid-area: panel;
-    position: relative;
-  }
-
-  @media screen and (min-width: 990px) {
-    .cwf__panel {
-      /* Stick the panel while products scroll */
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      max-height: 100vh;
-      overflow: hidden;
-    }
   }
 
   .cwf__panel-inner {
-    height: 100%;
     display: flex;
     flex-direction: column;
   }
@@ -178,7 +166,6 @@
   .cwf__panel-link {
     display: flex;
     flex-direction: column;
-    height: 100%;
     text-decoration: none;
     color: inherit;
     overflow: hidden;
@@ -194,13 +181,10 @@
   }
 
   .cwf__panel-image-wrap {
-    flex: 1 1 auto;
+    /* Square aspect ratio */
+    aspect-ratio: 1 / 1;
     overflow: hidden;
-    min-height: 280px;
-
-    @media screen and (min-width: 990px) {
-      min-height: 0;
-    }
+    width: 100%;
   }
 
   .cwf__panel-image {
