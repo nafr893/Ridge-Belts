@@ -632,7 +632,7 @@
       }
     },
     "main": {
-      "type": "main-collection",
+      "type": "collection-with-featured",
       "blocks": {
         "filters": {
           "type": "filters",
