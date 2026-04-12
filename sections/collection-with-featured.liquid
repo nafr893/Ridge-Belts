@@ -42,6 +42,8 @@
       style="
         --product-grid-gap-mobile: {{ section.settings.columns_gap_vertical | at_most: 12 }}px {{ section.settings.columns_gap_horizontal | at_most: 12 }}px;
         --product-grid-gap-desktop: {{ section.settings.columns_gap_vertical }}px {{ section.settings.columns_gap_horizontal }}px;
+        --cwf-gap-v: {{ section.settings.columns_gap_vertical }}px;
+        --cwf-gap-v-mobile: {{ section.settings.columns_gap_vertical | at_most: 12 }}px;
       "
     >
       <span ref="viewMorePrevious"></span>
@@ -178,24 +180,33 @@
   .cwf__grid-featured {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: var(--cwf-gap-v-mobile, 12px);
     list-style: none;
     margin: 0;
     padding: 0;
+
+    @media screen and (min-width: 990px) {
+      gap: var(--cwf-gap-v, 16px);
+    }
   }
 
   /* ── Remaining products (4 columns, full width below) ── */
   .cwf__grid-remaining {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: var(--cwf-gap-v-mobile, 12px);
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-top: 16px;
+    margin-top: var(--cwf-gap-v-mobile, 12px);
 
     @media screen and (min-width: 750px) {
       grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media screen and (min-width: 990px) {
+      gap: var(--cwf-gap-v, 16px);
+      margin-top: var(--cwf-gap-v, 16px);
     }
   }
 
@@ -228,10 +239,21 @@
   }
 
   .cwf__panel-image-wrap {
-    flex: 1 1 auto;
+    /* Mobile: fixed aspect ratio so image has visible height */
     overflow: hidden;
     width: 100%;
-    min-height: 200px;
+    aspect-ratio: 4 / 3;
+
+    @media screen and (min-width: 990px) {
+      /* Desktop: grow to fill remaining panel height after text content.
+         position:relative + absolute image prevents the image's intrinsic
+         dimensions from driving the grid row height — the left product
+         column dictates height instead. */
+      aspect-ratio: unset;
+      flex: 1 1 0;
+      min-height: 0;
+      position: relative;
+    }
   }
 
   .cwf__panel-image {
@@ -241,6 +263,11 @@
     object-fit: var(--cwf-image-fit, cover);
     object-position: center;
     transition: transform 0.4s ease;
+
+    @media screen and (min-width: 990px) {
+      position: absolute;
+      inset: 0;
+    }
   }
 
   .cwf__panel-link:hover .cwf__panel-image {
