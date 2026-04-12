@@ -127,8 +127,8 @@
       'panel';
 
     @media screen and (min-width: 990px) {
-      /* 50/50 split with a gap between the product grid and featured panel */
-      grid-template-columns: 1fr 1fr;
+      /* Left gets remaining space, right panel is exactly half the viewport */
+      grid-template-columns: 1fr 50dvw;
       gap: 24px;
       grid-template-areas:
         'filters filters'
@@ -151,6 +151,13 @@
 
   .cwf__products .main-collection-grid {
     padding: 0;
+  }
+
+  /* Force exactly 2 columns in the product grid on desktop */
+  @media screen and (min-width: 990px) {
+    .cwf__products .product-grid {
+      --product-grid-columns-desktop: repeat(2, 1fr) !important;
+    }
   }
 
   /* ── Featured panel ────────────────────────────────────── */
