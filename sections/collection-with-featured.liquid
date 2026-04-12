@@ -78,16 +78,7 @@
           {%- comment -%} Image {%- endcomment -%}
           <div class="cwf__panel-image-wrap">
             {% if section.settings.featured_image != blank %}
-              {{
-                section.settings.featured_image
-                | image_url: width: 1200
-                | image_tag:
-                  loading: 'lazy',
-                  alt: section.settings.featured_image.alt | escape,
-                  class: 'cwf__panel-image',
-                  widths: '400, 600, 800, 1000, 1200',
-                  sizes: '(min-width: 750px) 33vw, 100vw'
-              }}
+              {{ section.settings.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: section.settings.featured_image.alt | escape, class: 'cwf__panel-image', widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 750px) 33vw, 100vw' }}
             {% else %}
               {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg cwf__panel-image' }}
             {% endif %}
