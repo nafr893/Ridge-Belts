@@ -1,9 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "section": {
       "type": "section",
       "blocks": {
-        "text_heading": {
+        "text_tqQTNE": {
           "type": "text",
           "name": "Title",
           "settings": {
@@ -13,10 +22,12 @@
             "alignment": "left",
             "type_preset": "h2",
             "font": "var(--font-primary--family)",
+            "font_size": "",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -27,9 +38,9 @@
           },
           "blocks": {}
         },
-        "text_desc": {
+        "text_LkU3p6": {
           "type": "text",
-          "name": "Description",
+          "name": "t:names.text",
           "settings": {
             "text": "<p>{{ closest.collection.description }}</p>",
             "width": "100%",
@@ -54,20 +65,27 @@
           "blocks": {}
         }
       },
-      "block_order": ["text_heading", "text_desc"],
+      "block_order": [
+        "text_tqQTNE",
+        "text_LkU3p6"
+      ],
       "name": "Collection heading",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
+        "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
         "gap": 12,
         "section_width": "page-width",
         "section_height": "",
+        "section_height_custom": 50,
         "color_scheme": "scheme-1",
         "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
         "border": "none",
         "border_width": 1,
         "border_opacity": 100,
@@ -81,7 +99,7 @@
       }
     },
     "main": {
-      "type": "collection-with-featured",
+      "type": "main-collection",
       "blocks": {
         "filters": {
           "type": "filters",
@@ -138,9 +156,23 @@
               },
               "blocks": {}
             },
-            "product_title": {
+            "swatches_hfqMyU": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            },
+            "product_title_4nY4eT": {
               "type": "product-title",
-              "name": "Product title",
+              "name": "t:names.product_title",
               "settings": {
                 "width": "100%",
                 "max_width": "normal",
@@ -163,7 +195,19 @@
               },
               "blocks": {}
             },
-            "price": {
+            "review_AbUfDX": {
+              "type": "review",
+              "name": "t:names.product_review_stars",
+              "settings": {
+                "stars_style": "shaded",
+                "show_number": true,
+                "rating_color": "primary",
+                "type_preset": "paragraph",
+                "alignment": "left"
+              },
+              "blocks": {}
+            },
+            "price_EzJzMm": {
               "type": "price",
               "settings": {
                 "show_sale_price_first": true,
@@ -186,26 +230,33 @@
               "blocks": {}
             }
           },
-          "block_order": ["card-gallery", "product_title", "price"]
+          "block_order": [
+            "card-gallery",
+            "swatches_hfqMyU",
+            "product_title_4nY4eT",
+            "review_AbUfDX",
+            "price_EzJzMm"
+          ]
         }
       },
       "settings": {
-        "featured_heading": "Featured Product",
-        "featured_text": "A short line about this featured product or collection.",
-        "featured_button_label": "Shop now",
-        "image_fit": "cover",
         "layout_type": "grid",
         "product_card_size": "medium",
         "mobile_product_card_size": "small",
-        "product_grid_width": "full-width",
+        "product_grid_width": "centered",
         "full_width_on_mobile": true,
         "columns_gap_horizontal": 16,
-        "columns_gap_vertical": 16,
+        "columns_gap_vertical": 24,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0,
         "color_scheme": "scheme-1",
         "padding-block-start": 0,
         "padding-block-end": 32
       }
     }
   },
-  "order": ["section", "main"]
+  "order": [
+    "section",
+    "main"
+  ]
 }
