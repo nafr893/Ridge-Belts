@@ -34,6 +34,9 @@
       results_size: collection.products_count
     %}
 
+    {%- comment -%} Inner body — spans full collection-wrapper width, own 50/50 grid {%- endcomment -%}
+    <div class="cwf__body">
+
     {%- comment -%} Product grid — left column {%- endcomment -%}
     <div class="cwf__products">
       {% paginate collection.products by 24 %}
@@ -113,39 +116,29 @@
       </div>
     </div>
 
+    </div>{%- comment -%} end cwf__body {%- endcomment -%}
+
   </div>
 </results-list>
 
 {% stylesheet %}
-  /* ── Outer layout ──────────────────────────────────────── */
-  .cwf__layout {
+  /* ── Inner two-column body ─────────────────────────────── */
+  /* Span all columns of collection-wrapper so it escapes the page-margin grid */
+  .cwf__body {
+    grid-column: 1 / -1;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas:
-      'filters'
-      'products'
-      'panel';
 
     @media screen and (min-width: 990px) {
-      /* Left gets remaining space, right panel is exactly half the viewport */
-      grid-template-columns: 1fr 50dvw;
+      /* Left: remaining space  |  Right: exactly half the viewport */
+      grid-template-columns: 1fr 50vw;
       gap: 24px;
-      grid-template-areas:
-        'filters filters'
-        'products panel';
+      align-items: start;
     }
-  }
-
-  /* ── Filters row ───────────────────────────────────────── */
-  .cwf__layout > .facets-block-wrapper,
-  .cwf__layout > #filters,
-  .cwf__layout > [id^='shopify-section-'] > .facets-block-wrapper {
-    grid-area: filters;
   }
 
   /* ── Product grid ──────────────────────────────────────── */
   .cwf__products {
-    grid-area: products;
     min-width: 0;
   }
 
@@ -153,10 +146,15 @@
     padding: 0;
   }
 
+  /* Lock to 2 columns on desktop inside the left half */
+  @media screen and (min-width: 990px) {
+    .cwf__products .product-grid {
+      --product-grid-columns-desktop: repeat(2, 1fr);
+    }
+  }
 
   /* ── Featured panel ────────────────────────────────────── */
   .cwf__panel {
-    grid-area: panel;
   }
 
   .cwf__panel-inner {
