@@ -34,17 +34,110 @@
       results_size: collection.products_count
     %}
 
-    {%- comment -%} Inner body — spans full collection-wrapper width, own 50/50 grid {%- endcomment -%}
-    <div class="cwf__body">
+    {% paginate collection.products by 24 %}
 
-    {%- comment -%} Product grid — left column {%- endcomment -%}
-    <div class="cwf__products">
-      {% paginate collection.products by 24 %}
-        {% capture children %}
-          {% for product in collection.products %}
+    <div
+      id="ResultsList"
+      class="cwf__results"
+      style="
+        --product-grid-gap-mobile: {{ section.settings.columns_gap_vertical | at_most: 12 }}px {{ section.settings.columns_gap_horizontal | at_most: 12 }}px;
+        --product-grid-gap-desktop: {{ section.settings.columns_gap_vertical }}px {{ section.settings.columns_gap_horizontal }}px;
+      "
+    >
+      <span ref="viewMorePrevious"></span>
+
+      {%- comment -%} Inner body — spans full collection-wrapper width, own 50/50 grid {%- endcomment -%}
+      <div class="cwf__body">
+
+        {%- comment -%} Left: first 4 products in 2-column grid {%- endcomment -%}
+        <div class="cwf__products">
+          <ul
+            class="cwf__grid-featured product-grid product-grid--{{ section.id }}"
+            product-grid-view="default"
+            ref="grid"
+            role="list"
+            data-last-page="{{ paginate.pages }}"
+            data-product-card-size="{{ section.settings.product_card_size }}"
+          >
+            {% for product in collection.products limit: 4 %}
+              <li
+                id="{{ section.id }}-{{ product.id }}"
+                class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+                data-page="{{ paginate.current_page }}"
+                data-product-id="{{ product.id }}"
+                ref="cards[]"
+              >
+                {% # theme-check-disable %}
+                {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
+                {% # theme-check-enable %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        {%- comment -%} Right: featured panel, stretches to match 2-row height {%- endcomment -%}
+        <div class="cwf__panel" style="--cwf-image-fit: {{ section.settings.image_fit }};">
+          <div class="cwf__panel-inner">
+            <a
+              class="cwf__panel-link"
+              href="{{ section.settings.featured_link | default: '#' }}"
+              {% if section.settings.featured_link == blank %}aria-disabled="true"{% endif %}
+            >
+              {% if section.settings.featured_label != blank %}
+                <p class="cwf__panel-label">{{ section.settings.featured_label }}</p>
+              {% endif %}
+
+              <div class="cwf__panel-image-wrap">
+                {% if section.settings.featured_image != blank %}
+                  {% assign cwf_alt = section.settings.featured_image.alt | escape %}
+                  {% assign cwf_src = section.settings.featured_image | image_url: width: 1200 %}
+                  {% assign cwf_src_400 = section.settings.featured_image | image_url: width: 400 %}
+                  {% assign cwf_src_800 = section.settings.featured_image | image_url: width: 800 %}
+                  <img
+                    src="{{ cwf_src }}"
+                    srcset="{{ cwf_src_400 }} 400w, {{ cwf_src_800 }} 800w, {{ cwf_src }} 1200w"
+                    sizes="50vw"
+                    alt="{{ cwf_alt }}"
+                    loading="lazy"
+                    class="cwf__panel-image"
+                    width="{{ section.settings.featured_image.width }}"
+                    height="{{ section.settings.featured_image.height }}"
+                  >
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg cwf__panel-image' }}
+                {% endif %}
+              </div>
+
+              <div class="cwf__panel-content">
+                {% if section.settings.featured_heading != blank %}
+                  <h2 class="cwf__panel-heading">{{ section.settings.featured_heading }}</h2>
+                {% endif %}
+                {% if section.settings.featured_text != blank %}
+                  <p class="cwf__panel-text">{{ section.settings.featured_text }}</p>
+                {% endif %}
+                {% if section.settings.featured_button_label != blank %}
+                  <span class="cwf__panel-button button">{{ section.settings.featured_button_label }}</span>
+                {% endif %}
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>{%- comment -%} end cwf__body {%- endcomment -%}
+
+      {%- comment -%} Remaining products — full width, 4 columns {%- endcomment -%}
+      {% if collection.products.size > 4 %}
+        <ul
+          class="cwf__grid-remaining product-grid product-grid--{{ section.id }}"
+          product-grid-view="default"
+          role="list"
+          data-last-page="{{ paginate.pages }}"
+          data-product-card-size="{{ section.settings.product_card_size }}"
+        >
+          {% for product in collection.products offset: 4 %}
             <li
               id="{{ section.id }}-{{ product.id }}"
-              class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+              class="product-grid__item product-grid__item--{{ forloop.index0 | plus: 4 }}"
               data-page="{{ paginate.current_page }}"
               data-product-id="{{ product.id }}"
               ref="cards[]"
@@ -54,69 +147,13 @@
               {% # theme-check-enable %}
             </li>
           {% endfor %}
-        {% endcapture %}
+        </ul>
+      {% endif %}
 
-        {% render 'product-grid',
-          section: section,
-          children: children,
-          products: collection.products,
-          paginate: paginate
-        %}
-      {% endpaginate %}
-    </div>
+      <span ref="viewMoreNext"></span>
+    </div>{%- comment -%} end cwf__results {%- endcomment -%}
 
-    {%- comment -%} Featured panel — right column {%- endcomment -%}
-    <div class="cwf__panel" style="--cwf-image-fit: {{ section.settings.image_fit }};">
-      <div class="cwf__panel-inner">
-        <a
-          class="cwf__panel-link"
-          href="{{ section.settings.featured_link | default: '#' }}"
-          {% if section.settings.featured_link == blank %}aria-disabled="true"{% endif %}
-        >
-          {%- comment -%} Label / eyebrow {%- endcomment -%}
-          {% if section.settings.featured_label != blank %}
-            <p class="cwf__panel-label">{{ section.settings.featured_label }}</p>
-          {% endif %}
-
-          {%- comment -%} Image {%- endcomment -%}
-          <div class="cwf__panel-image-wrap">
-            {% if section.settings.featured_image != blank %}
-              {% assign cwf_alt = section.settings.featured_image.alt | escape %}
-              {% assign cwf_src = section.settings.featured_image | image_url: width: 1200 %}
-              {% assign cwf_src_400 = section.settings.featured_image | image_url: width: 400 %}
-              {% assign cwf_src_800 = section.settings.featured_image | image_url: width: 800 %}
-              <img
-                src="{{ cwf_src }}"
-                srcset="{{ cwf_src_400 }} 400w, {{ cwf_src_800 }} 800w, {{ cwf_src }} 1200w"
-                sizes="(min-width: 990px) 35vw, 100vw"
-                alt="{{ cwf_alt }}"
-                loading="lazy"
-                class="cwf__panel-image"
-                width="{{ section.settings.featured_image.width }}"
-                height="{{ section.settings.featured_image.height }}"
-              >
-            {% else %}
-              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg cwf__panel-image' }}
-            {% endif %}
-          </div>
-
-          {%- comment -%} Text content {%- endcomment -%}
-          <div class="cwf__panel-content">
-            {% if section.settings.featured_heading != blank %}
-              <h2 class="cwf__panel-heading">{{ section.settings.featured_heading }}</h2>
-            {% endif %}
-            {% if section.settings.featured_text != blank %}
-              <p class="cwf__panel-text">{{ section.settings.featured_text }}</p>
-            {% endif %}
-            {% if section.settings.featured_button_label != blank %}
-              <span class="cwf__panel-button button">{{ section.settings.featured_button_label }}</span>
-            {% endif %}
-          </div>
-        </a>
-      </div>
-    </div>
-
-    </div>{%- comment -%} end cwf__body {%- endcomment -%}
+    {% endpaginate %}
 
   </div>
 </results-list>
@@ -133,23 +170,32 @@
       /* Left: remaining space  |  Right: exactly half the viewport */
       grid-template-columns: 1fr 50vw;
       gap: 24px;
-      align-items: start;
+      align-items: stretch;
     }
   }
 
-  /* ── Product grid ──────────────────────────────────────── */
-  .cwf__products {
-    min-width: 0;
-  }
-
-  .cwf__products .main-collection-grid {
+  /* ── Featured grid (2 columns, beside the panel) ────── */
+  .cwf__grid-featured {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    list-style: none;
+    margin: 0;
     padding: 0;
   }
 
-  /* Lock to 2 columns on desktop inside the left half */
-  @media screen and (min-width: 990px) {
-    .cwf__products .product-grid {
-      --product-grid-columns-desktop: repeat(2, 1fr);
+  /* ── Remaining products (4 columns, full width below) ── */
+  .cwf__grid-remaining {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 16px;
+
+    @media screen and (min-width: 750px) {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
@@ -160,6 +206,7 @@
   .cwf__panel-inner {
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
   .cwf__panel-link {
@@ -168,6 +215,7 @@
     text-decoration: none;
     color: inherit;
     overflow: hidden;
+    height: 100%;
   }
 
   .cwf__panel-label {
@@ -180,10 +228,10 @@
   }
 
   .cwf__panel-image-wrap {
-    /* Square aspect ratio */
-    aspect-ratio: 1 / 1;
+    flex: 1 1 auto;
     overflow: hidden;
     width: 100%;
+    min-height: 200px;
   }
 
   .cwf__panel-image {
