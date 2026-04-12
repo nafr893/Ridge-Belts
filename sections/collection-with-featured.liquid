@@ -24,17 +24,19 @@
 >
   {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
 
-  <div class="collection-wrapper cwf__layout gap-style">
-
-    {%- comment -%} Filters span full width above the split {%- endcomment -%}
+  {%- comment -%} Filters — own row, full width {%- endcomment -%}
+  <div class="collection-wrapper gap-style">
     {% content_for 'block',
       type: 'filters',
       id: 'filters',
       results: collection,
       results_size: collection.products_count
     %}
+  </div>
 
-    {%- comment -%} Product grid — left column {%- endcomment -%}
+  {%- comment -%} Two-column body: products left, featured panel right {%- endcomment -%}
+  <div class="cwf__body">
+
     <div class="cwf__products">
       {% paginate collection.products by 24 %}
         {% capture children %}
@@ -62,7 +64,7 @@
       {% endpaginate %}
     </div>
 
-    {%- comment -%} Featured panel — right column {%- endcomment -%}
+    {%- comment -%} Featured panel — right, always 50vw on desktop {%- endcomment -%}
     <div class="cwf__panel" style="--cwf-image-fit: {{ section.settings.image_fit }};">
       <div class="cwf__panel-inner">
         <a
@@ -70,12 +72,10 @@
           href="{{ section.settings.featured_link | default: '#' }}"
           {% if section.settings.featured_link == blank %}aria-disabled="true"{% endif %}
         >
-          {%- comment -%} Label / eyebrow {%- endcomment -%}
           {% if section.settings.featured_label != blank %}
             <p class="cwf__panel-label">{{ section.settings.featured_label }}</p>
           {% endif %}
 
-          {%- comment -%} Image {%- endcomment -%}
           <div class="cwf__panel-image-wrap">
             {% if section.settings.featured_image != blank %}
               {% assign cwf_alt = section.settings.featured_image.alt | escape %}
@@ -85,7 +85,7 @@
               <img
                 src="{{ cwf_src }}"
                 srcset="{{ cwf_src_400 }} 400w, {{ cwf_src_800 }} 800w, {{ cwf_src }} 1200w"
-                sizes="(min-width: 990px) 35vw, 100vw"
+                sizes="50vw"
                 alt="{{ cwf_alt }}"
                 loading="lazy"
                 class="cwf__panel-image"
@@ -97,7 +97,6 @@
             {% endif %}
           </div>
 
-          {%- comment -%} Text content {%- endcomment -%}
           <div class="cwf__panel-content">
             {% if section.settings.featured_heading != blank %}
               <h2 class="cwf__panel-heading">{{ section.settings.featured_heading }}</h2>
@@ -117,35 +116,21 @@
 </results-list>
 
 {% stylesheet %}
-  /* ── Outer layout ──────────────────────────────────────── */
-  .cwf__layout {
+  /* ── Two-column body ───────────────────────────────────── */
+  .cwf__body {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas:
-      'filters'
-      'products'
-      'panel';
 
     @media screen and (min-width: 990px) {
-      /* Left gets remaining space, right panel is exactly half the viewport */
-      grid-template-columns: 1fr 50dvw;
+      /* Products take remaining space; panel is exactly 50vw */
+      grid-template-columns: 1fr 50vw;
       gap: 24px;
-      grid-template-areas:
-        'filters filters'
-        'products panel';
+      align-items: start;
     }
-  }
-
-  /* ── Filters row ───────────────────────────────────────── */
-  .cwf__layout > .facets-block-wrapper,
-  .cwf__layout > #filters,
-  .cwf__layout > [id^='shopify-section-'] > .facets-block-wrapper {
-    grid-area: filters;
   }
 
   /* ── Product grid ──────────────────────────────────────── */
   .cwf__products {
-    grid-area: products;
     min-width: 0;
   }
 
