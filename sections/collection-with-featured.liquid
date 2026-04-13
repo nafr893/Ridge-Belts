@@ -314,23 +314,28 @@
   }
 
   /* ── Camo border via pseudo-element ───────────────────── */
-  /* Wraps the entire cwf__body (products + panel).
-     Overlaid absolutely so it doesn't affect layout or require knowing
-     the background color. border-image tiles the uploaded camo image
-     across the border area. Invisible when no image or width is 0. */
+  /* background-image + CSS mask "donut" = border ring only.
+     More reliable than border-image with CSS custom properties.
+     The mask subtracts the inner (content) box from the outer box,
+     leaving only the border-width ring visible. */
   .cwf__body::after {
     content: '';
     position: absolute;
     inset: 0;
     pointer-events: none;
     z-index: 2;
-    border-width: var(--cwf-border-width, 0px);
-    border-style: solid;
-    border-color: transparent;
-    border-image-source: var(--cwf-border-image, none);
-    border-image-slice: 33%;
-    border-image-width: var(--cwf-border-width, 0px);
-    border-image-repeat: round;
+    padding: var(--cwf-border-width, 0px);
+    background-image: var(--cwf-border-image, none);
+    background-repeat: repeat;
+    background-size: auto;
+    -webkit-mask-image:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-image:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
   }
 
   /* placeholder svg fallback */
