@@ -19,7 +19,7 @@
 
 <results-list
   class="section product-grid-container cwf color-{{ section.settings.color_scheme }}"
-  style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
+  style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px; --cwf-border-width: {{ section.settings.border_width }}px;{% if section.settings.border_image != blank %} --cwf-border-image: url('{{ section.settings.border_image | image_url: width: 400 }}');{% endif %}"
   section-id="{{ section.id }}"
 >
   {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
@@ -54,7 +54,7 @@
         Remaining products span all 4 columns below.
         Equal gaps everywhere → all cards are the same width.
       {%- endcomment -%}
-      <div class="cwf__body" style="--cwf-border-width: {{ section.settings.border_width }}px;{% if section.settings.border_image != blank %} --cwf-border-image: url('{{ section.settings.border_image | image_url: width: 400 }}');{% endif %}">
+      <div class="cwf__body">
 
         {%- comment -%} Cols 1-2: first 4 products in a 2-column sub-grid {%- endcomment -%}
         <ul
@@ -172,7 +172,6 @@
   /* grid-column: 1/-1 escapes the collection-wrapper margin tracks */
   .cwf__body {
     grid-column: 1 / -1;
-    position: relative; /* needed for ::after border overlay */
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--cwf-gap-v-mobile, 12px);
@@ -313,13 +312,17 @@
     margin-top: 0.25rem;
   }
 
-  /* ── Camo border via pseudo-element + mask donut ──────── */
-  /* ::after fills the body, background-image is the camo tile.
-     The two-layer mask with exclude/destination-out cuts out the
-     inner (content-box) area, leaving only the padding ring visible.
-     Standard browsers: mask-composite: exclude
-     Safari/WebKit:     -webkit-mask-composite: destination-out  */
-  .cwf__body::after {
+  /* ── Camo border on the outer section element ─────────── */
+  /* .cwf is on the <results-list> which spans the full section width.
+     The two-layer mask donut cuts out the inner content-box area,
+     leaving only the padding ring (= the border) visible.
+     Standard: mask-composite: exclude
+     Safari:   -webkit-mask-composite: destination-out          */
+  .cwf {
+    position: relative;
+  }
+
+  .cwf::after {
     content: '';
     position: absolute;
     inset: 0;
