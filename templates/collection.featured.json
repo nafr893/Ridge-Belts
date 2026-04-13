@@ -153,7 +153,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>Belts</h3>",
+                "text": "<h3>{{ closest.collection.title }}</h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -217,7 +217,7 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "adapt",
+                "image_ratio": "square",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -287,7 +287,7 @@
       },
       "name": "t:names.products_carousel",
       "settings": {
-        "collection": "",
+        "collection": "mossy-oak",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 6,
