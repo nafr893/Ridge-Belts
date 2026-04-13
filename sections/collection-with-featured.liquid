@@ -175,16 +175,10 @@
   }
 
   /* ── Mobile padding ────────────────────────────────────── */
-  /* Apply standard page margin on mobile so cards/text aren't flush to edge */
+  /* Inset everything from the screen edges on mobile */
   @media screen and (max-width: 989px) {
-    .cwf__grid-featured,
-    .cwf__grid-remaining,
-    .cwf__panel-content {
-      padding-inline: var(--page-margin, 16px);
-    }
-
-    .cwf__panel-label {
-      padding-inline: var(--page-margin, 16px);
+    .cwf__results {
+      padding-inline: 1rem;
     }
   }
 
