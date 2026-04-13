@@ -40,9 +40,9 @@
         "text_jAkP4y": {
           "type": "text",
           "settings": {
-            "text": "<p>We've Partnered with Mossy Oak </p>",
+            "text": "<p>We’ve partnered with Mossy Oak to bring their iconic Bottomland camo into our new MTN LITE belt and apparel collection. This collection is built for the field with durability you can rely on every day.</p>",
             "width": "fit-content",
-            "max_width": "narrow",
+            "max_width": "normal",
             "alignment": "left",
             "type_preset": "rte",
             "font": "var(--font-body--family)",
