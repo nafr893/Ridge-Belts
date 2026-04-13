@@ -48,36 +48,39 @@
     >
       <span ref="viewMorePrevious"></span>
 
-      {%- comment -%} Inner body — spans full collection-wrapper width, own 50/50 grid {%- endcomment -%}
+      {%- comment -%}
+        cwf__body is a 4-column grid on desktop.
+        Featured grid occupies cols 1-2, panel occupies cols 3-4 (same row).
+        Remaining products span all 4 columns below.
+        Equal gaps everywhere → all cards are the same width.
+      {%- endcomment -%}
       <div class="cwf__body">
 
-        {%- comment -%} Left: first 4 products in 2-column grid {%- endcomment -%}
-        <div class="cwf__products">
-          <ul
-            class="cwf__grid-featured product-grid product-grid--{{ section.id }}"
-            product-grid-view="default"
-            ref="grid"
-            role="list"
-            data-last-page="{{ paginate.pages }}"
-            data-product-card-size="{{ section.settings.product_card_size }}"
-          >
-            {% for product in collection.products limit: 4 %}
-              <li
-                id="{{ section.id }}-{{ product.id }}"
-                class="product-grid__item product-grid__item--{{ forloop.index0 }}"
-                data-page="{{ paginate.current_page }}"
-                data-product-id="{{ product.id }}"
-                ref="cards[]"
-              >
-                {% # theme-check-disable %}
-                {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
-                {% # theme-check-enable %}
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
+        {%- comment -%} Cols 1-2: first 4 products in a 2-column sub-grid {%- endcomment -%}
+        <ul
+          class="cwf__grid-featured product-grid product-grid--{{ section.id }}"
+          product-grid-view="default"
+          ref="grid"
+          role="list"
+          data-last-page="{{ paginate.pages }}"
+          data-product-card-size="{{ section.settings.product_card_size }}"
+        >
+          {% for product in collection.products limit: 4 %}
+            <li
+              id="{{ section.id }}-{{ product.id }}"
+              class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+              data-page="{{ paginate.current_page }}"
+              data-product-id="{{ product.id }}"
+              ref="cards[]"
+            >
+              {% # theme-check-disable %}
+              {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
+              {% # theme-check-enable %}
+            </li>
+          {% endfor %}
+        </ul>
 
-        {%- comment -%} Right: featured panel, stretches to match 2-row height {%- endcomment -%}
+        {%- comment -%} Cols 3-4: featured panel {%- endcomment -%}
         <div class="cwf__panel" style="--cwf-image-fit: {{ section.settings.image_fit }};">
           <div class="cwf__panel-inner">
             <a
@@ -98,7 +101,7 @@
                   <img
                     src="{{ cwf_src }}"
                     srcset="{{ cwf_src_400 }} 400w, {{ cwf_src_800 }} 800w, {{ cwf_src }} 1200w"
-                    sizes="50vw"
+                    sizes="(min-width: 990px) 50vw, 100vw"
                     alt="{{ cwf_alt }}"
                     loading="lazy"
                     class="cwf__panel-image"
@@ -122,32 +125,32 @@
           </div>
         </div>
 
-      </div>{%- comment -%} end cwf__body {%- endcomment -%}
+        {%- comment -%} All 4 cols: remaining products {%- endcomment -%}
+        {% if collection.products.size > 4 %}
+          <ul
+            class="cwf__grid-remaining product-grid product-grid--{{ section.id }}"
+            product-grid-view="default"
+            role="list"
+            data-last-page="{{ paginate.pages }}"
+            data-product-card-size="{{ section.settings.product_card_size }}"
+          >
+            {% for product in collection.products offset: 4 %}
+              <li
+                id="{{ section.id }}-{{ product.id }}"
+                class="product-grid__item product-grid__item--{{ forloop.index0 | plus: 4 }}"
+                data-page="{{ paginate.current_page }}"
+                data-product-id="{{ product.id }}"
+                ref="cards[]"
+              >
+                {% # theme-check-disable %}
+                {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
+                {% # theme-check-enable %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
 
-      {%- comment -%} Remaining products — full width, 4 columns {%- endcomment -%}
-      {% if collection.products.size > 4 %}
-        <ul
-          class="cwf__grid-remaining product-grid product-grid--{{ section.id }}"
-          product-grid-view="default"
-          role="list"
-          data-last-page="{{ paginate.pages }}"
-          data-product-card-size="{{ section.settings.product_card_size }}"
-        >
-          {% for product in collection.products offset: 4 %}
-            <li
-              id="{{ section.id }}-{{ product.id }}"
-              class="product-grid__item product-grid__item--{{ forloop.index0 | plus: 4 }}"
-              data-page="{{ paginate.current_page }}"
-              data-product-id="{{ product.id }}"
-              ref="cards[]"
-            >
-              {% # theme-check-disable %}
-              {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
-              {% # theme-check-enable %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
+      </div>{%- comment -%} end cwf__body {%- endcomment -%}
 
       <span ref="viewMoreNext"></span>
     </div>{%- comment -%} end cwf__results {%- endcomment -%}
@@ -158,31 +161,31 @@
 </results-list>
 
 {% stylesheet %}
-  /* ── Inner two-column body ─────────────────────────────── */
-  /* Span all columns of collection-wrapper so it escapes the page-margin grid */
-  .cwf__body {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px; /* mobile: space between product grid and featured panel */
-
-    @media screen and (min-width: 990px) {
-      /* Left: remaining space  |  Right: exactly half the viewport */
-      grid-template-columns: 1fr 50vw;
-      gap: 24px;
-      align-items: stretch;
-    }
-  }
-
   /* ── Mobile padding ────────────────────────────────────── */
-  /* Inset everything from the screen edges on mobile */
   @media screen and (max-width: 989px) {
     .cwf__results {
       padding-inline: 1rem;
     }
   }
 
-  /* ── Featured grid (2 columns, beside the panel) ────── */
+  /* ── Body: unified 4-column grid on desktop ────────────── */
+  /* grid-column: 1/-1 escapes the collection-wrapper margin tracks */
+  .cwf__body {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--cwf-gap-v-mobile, 12px);
+
+    @media screen and (min-width: 990px) {
+      /* 4 equal columns — featured grid takes cols 1-2, panel takes cols 3-4,
+         remaining products span all 4. Equal gap everywhere = equal card widths. */
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--cwf-gap-v, 16px);
+      align-items: stretch;
+    }
+  }
+
+  /* ── Featured grid: cols 1-2 on desktop, 2-col sub-grid ── */
   .cwf__grid-featured {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -192,11 +195,12 @@
     padding: 0;
 
     @media screen and (min-width: 990px) {
+      grid-column: 1 / 3;
       gap: var(--cwf-gap-v, 16px);
     }
   }
 
-  /* ── Remaining products (4 columns, full width below) ── */
+  /* ── Remaining products: all 4 cols on desktop ─────────── */
   .cwf__grid-remaining {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -204,19 +208,24 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-top: var(--cwf-gap-v-mobile, 12px);
 
     @media screen and (min-width: 750px) {
       grid-template-columns: repeat(4, 1fr);
     }
 
     @media screen and (min-width: 990px) {
+      grid-column: 1 / 5;
       gap: var(--cwf-gap-v, 16px);
-      margin-top: var(--cwf-gap-v, 16px);
     }
   }
 
-  /* ── Featured panel ────────────────────────────────────── */
+  /* ── Featured panel: cols 3-4 on desktop ──────────────── */
+  @media screen and (min-width: 990px) {
+    .cwf__panel {
+      grid-column: 3 / 5;
+    }
+  }
+
   .cwf__panel-inner {
     display: flex;
     flex-direction: column;
