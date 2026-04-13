@@ -117,9 +117,6 @@
                 {% if section.settings.featured_text != blank %}
                   <p class="cwf__panel-text">{{ section.settings.featured_text }}</p>
                 {% endif %}
-                {% if section.settings.featured_button_label != blank %}
-                  <span class="cwf__panel-button button">{{ section.settings.featured_button_label }}</span>
-                {% endif %}
               </div>
             </a>
           </div>
@@ -211,9 +208,6 @@
   }
 
   /* ── Featured panel ────────────────────────────────────── */
-  .cwf__panel {
-  }
-
   .cwf__panel-inner {
     display: flex;
     flex-direction: column;
