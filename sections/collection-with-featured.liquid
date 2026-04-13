@@ -313,16 +313,30 @@
     margin-top: 0.25rem;
   }
 
-  /* ── Camo border via body background + padding ─────────── */
-  /* Setting background-image directly on the grid container is the most
-     reliable approach. The padding creates the visible border ring —
-     product cards and the panel have opaque backgrounds so they cover
-     the camo in the content area. Only the outer padding ring shows through. */
-  .cwf__body {
+  /* ── Camo border via pseudo-element + mask donut ──────── */
+  /* ::after fills the body, background-image is the camo tile.
+     The two-layer mask with exclude/destination-out cuts out the
+     inner (content-box) area, leaving only the padding ring visible.
+     Standard browsers: mask-composite: exclude
+     Safari/WebKit:     -webkit-mask-composite: destination-out  */
+  .cwf__body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    padding: var(--cwf-border-width, 0px);
     background-image: var(--cwf-border-image, none);
     background-repeat: repeat;
     background-size: auto;
-    padding: var(--cwf-border-width, 0px);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: destination-out;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
   }
 
   /* placeholder svg fallback */
