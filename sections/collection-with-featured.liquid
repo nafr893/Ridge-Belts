@@ -164,12 +164,27 @@
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: 1fr;
+    gap: 16px; /* mobile: space between product grid and featured panel */
 
     @media screen and (min-width: 990px) {
       /* Left: remaining space  |  Right: exactly half the viewport */
       grid-template-columns: 1fr 50vw;
       gap: 24px;
       align-items: stretch;
+    }
+  }
+
+  /* ── Mobile padding ────────────────────────────────────── */
+  /* Apply standard page margin on mobile so cards/text aren't flush to edge */
+  @media screen and (max-width: 989px) {
+    .cwf__grid-featured,
+    .cwf__grid-remaining,
+    .cwf__panel-content {
+      padding-inline: var(--page-margin, 16px);
+    }
+
+    .cwf__panel-label {
+      padding-inline: var(--page-margin, 16px);
     }
   }
 
