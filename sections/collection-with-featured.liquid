@@ -313,29 +313,16 @@
     margin-top: 0.25rem;
   }
 
-  /* ── Camo border via pseudo-element ───────────────────── */
-  /* background-image + CSS mask "donut" = border ring only.
-     More reliable than border-image with CSS custom properties.
-     The mask subtracts the inner (content) box from the outer box,
-     leaving only the border-width ring visible. */
-  .cwf__body::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-    padding: var(--cwf-border-width, 0px);
+  /* ── Camo border via body background + padding ─────────── */
+  /* Setting background-image directly on the grid container is the most
+     reliable approach. The padding creates the visible border ring —
+     product cards and the panel have opaque backgrounds so they cover
+     the camo in the content area. Only the outer padding ring shows through. */
+  .cwf__body {
     background-image: var(--cwf-border-image, none);
     background-repeat: repeat;
     background-size: auto;
-    -webkit-mask-image:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-image:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask-composite: exclude;
+    padding: var(--cwf-border-width, 0px);
   }
 
   /* placeholder svg fallback */
