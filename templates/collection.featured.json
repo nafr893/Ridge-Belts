@@ -781,7 +781,7 @@
         "featured_button_label": "Shop now",
         "featured_link": "",
         "layout_type": "grid",
-        "product_card_size": "medium",
+        "product_card_size": "small",
         "mobile_product_card_size": "small",
         "product_grid_width": "centered",
         "full_width_on_mobile": true,
