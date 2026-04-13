@@ -54,7 +54,7 @@
         Remaining products span all 4 columns below.
         Equal gaps everywhere → all cards are the same width.
       {%- endcomment -%}
-      <div class="cwf__body">
+      <div class="cwf__body" style="--cwf-border-width: {{ section.settings.border_width }}px;{% if section.settings.border_image != blank %} --cwf-border-image: url('{{ section.settings.border_image | image_url: width: 400 }}');{% endif %}">
 
         {%- comment -%} Cols 1-2: first 4 products in a 2-column sub-grid {%- endcomment -%}
         <ul
@@ -81,7 +81,7 @@
         </ul>
 
         {%- comment -%} Cols 3-4: featured panel {%- endcomment -%}
-        <div class="cwf__panel" style="--cwf-image-fit: {{ section.settings.image_fit }}; --cwf-border-width: {{ section.settings.border_width }}px;{% if section.settings.border_image != blank %} --cwf-border-image: url('{{ section.settings.border_image | image_url: width: 400 }}');{% endif %}">
+        <div class="cwf__panel" style="--cwf-image-fit: {{ section.settings.image_fit }};">
           <div class="cwf__panel-inner">
             <a
               class="cwf__panel-link"
@@ -172,6 +172,7 @@
   /* grid-column: 1/-1 escapes the collection-wrapper margin tracks */
   .cwf__body {
     grid-column: 1 / -1;
+    position: relative; /* needed for ::after border overlay */
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--cwf-gap-v-mobile, 12px);
@@ -313,14 +314,11 @@
   }
 
   /* ── Camo border via pseudo-element ───────────────────── */
-  /* Overlaid absolutely so it doesn't affect layout or require knowing
+  /* Wraps the entire cwf__body (products + panel).
+     Overlaid absolutely so it doesn't affect layout or require knowing
      the background color. border-image tiles the uploaded camo image
      across the border area. Invisible when no image or width is 0. */
-  .cwf__panel {
-    position: relative;
-  }
-
-  .cwf__panel::after {
+  .cwf__body::after {
     content: '';
     position: absolute;
     inset: 0;
