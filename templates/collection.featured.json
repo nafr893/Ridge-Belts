@@ -677,7 +677,7 @@
             "card-gallery": {
               "type": "_product-card-gallery",
               "settings": {
-                "image_ratio": "adapt",
+                "image_ratio": "square",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -773,10 +773,11 @@
         }
       },
       "settings": {
+        "featured_image": "shopify://shop_images/Screenshot_2025-07-12_at_5.54.33_PM_fd0a9d50-6731-483c-a761-cac03e9dc930.jpg",
         "image_fit": "cover",
         "featured_label": "",
-        "featured_heading": "Featured Product",
-        "featured_text": "A short line about this featured product or collection.",
+        "featured_heading": "MTN LITE",
+        "featured_text": "Our Favorite",
         "featured_button_label": "Shop now",
         "featured_link": "",
         "layout_type": "grid",
