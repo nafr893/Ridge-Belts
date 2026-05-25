@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Last day of our Memorial Day Sale 25% off site wide",
+            "text": "Last day of our Memorial Sale 25% off site wide",
             "link": "shopify://collections/twin-peaks-topographical",
             "font": "var(--font-subheading--family)",
             "font_size": "0.875rem",
