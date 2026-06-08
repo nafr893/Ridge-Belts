@@ -312,7 +312,7 @@
         "group_JTG9Lk": {
           "type": "group",
           "settings": {
-            "link": "",
+            "link": "shopify://products/ridge-belts-x-mossy-oak-trucker-hat-bottomland",
             "open_in_new_tab": false,
             "content_direction": "column",
             "vertical_on_mobile": true,
@@ -365,7 +365,7 @@
             "text_fm9RDX": {
               "type": "text",
               "settings": {
-                "text": "<h3>Highlight Product 1</h3>",
+                "text": "<h3>CLASSIC HAT</h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
