@@ -354,7 +354,7 @@
               "settings": {
                 "size": "pixel",
                 "percent_size": 100,
-                "pixel_size": 64,
+                "pixel_size": 88,
                 "custom_mobile_size": false,
                 "size_mobile": "percent",
                 "percent_size_mobile": 100,
@@ -453,7 +453,7 @@
               "settings": {
                 "size": "pixel",
                 "percent_size": 100,
-                "pixel_size": 16,
+                "pixel_size": 192,
                 "custom_mobile_size": false,
                 "size_mobile": "percent",
                 "percent_size_mobile": 100,
@@ -479,7 +479,7 @@
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
-                "padding-block-start": 0,
+                "padding-block-start": 100,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
