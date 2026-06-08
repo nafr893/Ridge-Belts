@@ -70,7 +70,7 @@
             "label": "Shop Now",
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
-            "style_class": "button",
+            "style_class": "button-secondary",
             "width": "fit-content",
             "custom_width": 0,
             "width_mobile": "fit-content",
@@ -109,8 +109,8 @@
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 40,
-        "padding-block-end": 40
+        "padding-block-start": 100,
+        "padding-block-end": 100
       }
     },
     "product_list_PV3HDW": {
