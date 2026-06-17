@@ -315,6 +315,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "t:names.products_carousel",
       "settings": {
         "collection": "mossy-oak",
@@ -401,6 +402,7 @@
       "blocks": {
         "group_JTG9Lk": {
           "type": "group",
+          "disabled": true,
           "settings": {
             "link": "shopify://products/ridge-belts-x-mossy-oak-trucker-hat-bottomland",
             "open_in_new_tab": false,
@@ -500,6 +502,7 @@
         },
         "group_hkMPgn": {
           "type": "group",
+          "disabled": true,
           "settings": {
             "link": "shopify://products/rb-x-mossy-oak-washed-tee-short-sleeve-bottomland",
             "open_in_new_tab": false,
@@ -602,6 +605,7 @@
         "group_JTG9Lk",
         "group_hkMPgn"
       ],
+      "disabled": true,
       "name": "t:names.split_showcase",
       "settings": {
         "content_direction": "row",
@@ -863,7 +867,7 @@
         }
       },
       "settings": {
-        "featured_image": "shopify://shop_images/Screenshot_2025-07-12_at_5.54.33_PM_fd0a9d50-6731-483c-a761-cac03e9dc930.jpg",
+        "featured_image": "shopify://shop_images/grab4_5a56922a-64b5-4002-b1cf-d9cfb72fb844.jpg",
         "border_image": "shopify://shop_images/camo-bottomland.jpg",
         "border_width": 0,
         "image_fit": "cover",
