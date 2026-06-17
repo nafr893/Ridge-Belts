@@ -344,6 +344,7 @@
           "settings": {
             "source": "uploaded",
             "video": "shopify://files/videos/samplefinal.MOV",
+            "video_url": "",
             "video_autoplay": true,
             "video_loop": true,
             "alt": "",
@@ -420,7 +421,7 @@
             "color_scheme": "scheme-5",
             "background_media": "image",
             "video_position": "cover",
-            "background_image": "shopify://shop_images/Placeholder_v.png",
+            "background_image": "shopify://shop_images/trucker_ea5f9564-067d-46bf-abf8-98ab120f721d.jpg",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
