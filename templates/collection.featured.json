@@ -454,7 +454,7 @@
             "text_fm9RDX": {
               "type": "text",
               "settings": {
-                "text": "<h3>Highlight Product 1</h3>",
+                "text": "<h3>CLASSIC TRUCKER </h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
@@ -520,7 +520,7 @@
             "color_scheme": "scheme-5",
             "background_media": "image",
             "video_position": "cover",
-            "background_image": "shopify://shop_images/Placeholder_v.png",
+            "background_image": "shopify://shop_images/grab4.jpg",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
@@ -553,7 +553,7 @@
             "text_gd7JbJ": {
               "type": "text",
               "settings": {
-                "text": "<h3>Highlight Product 2</h3>",
+                "text": "<h3>WASHED SHORT SLEEVE</h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
