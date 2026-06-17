@@ -875,7 +875,7 @@
         "featured_heading": "MTN LITE",
         "featured_text": "Our best selling belt now in Mossy Oak Bottomland.",
         "featured_button_label": "Shop now",
-        "featured_link": "",
+        "featured_link": "shopify://products/mossy-oak-bottomland-mtn-lite",
         "layout_type": "grid",
         "product_card_size": "medium",
         "mobile_product_card_size": "small",
