@@ -81,7 +81,7 @@
             "text_zBKtzq": {
               "type": "text",
               "settings": {
-                "text": "<p>Ridge Belts X Mossy Oak brings the timeless Bottomland pattern into a collection built for the field. From the Mtn Lite Belt to everyday apparel, every piece is made to carry the tradition forward. </p>",
+                "text": "<p>Ridge Belts X Mossy Oak brings the timeless Bottomland pattern into a collection built for the field. It's time to carry the tradition forward.</p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "center",
@@ -97,7 +97,7 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 95,
-                "padding-block-end": 32,
+                "padding-block-end": 12,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
