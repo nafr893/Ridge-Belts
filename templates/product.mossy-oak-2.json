@@ -298,6 +298,7 @@
             "image_VDWfME": {
               "type": "image",
               "name": "t:names.image",
+              "disabled": true,
               "settings": {
                 "image": "shopify://shop_images/ICONSblack.png",
                 "link": "",
