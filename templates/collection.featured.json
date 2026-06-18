@@ -1071,7 +1071,7 @@
               "type": "button",
               "settings": {
                 "label": "SHOP NOW",
-                "link": "shopify://collections/all",
+                "link": "shopify://products/rb-x-mossy-oak-washed-tee-short-sleeve-bottomland",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
