@@ -17,7 +17,7 @@
           "settings": {
             "media_type_1": "video",
             "image_1": "shopify://shop_images/Ridge_Belts_Twin_Peaks_Homepage.webp",
-            "video_1": "shopify://files/videos/YOUTUBE3.mp4",
+            "video_1": "shopify://files/videos/samplefinal.MOV",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
@@ -80,7 +80,7 @@
                 "text_Q7rMxA": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>BELTS</h2>",
+                    "text": "<h3>NEW MOSSY OAK</h3>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -139,7 +139,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "Shop now",
-                "link": "shopify://collections/all-belts",
+                "link": "shopify://collections/mossy-oak",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "width": "fit-content",
