@@ -1,0 +1,355 @@
+{%- liquid
+  assign uid = block.id
+-%}
+ 
+{% style %}
+  .price-container-{{ uid }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.spacing }}px;
+    align-items: {{ block.settings.alignment }};
+  }
+ 
+  .price-row-{{ uid }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: {{ block.settings.price_spacing }}px;
+    align-items: center;
+  }
+ 
+  .price-current-{{ uid }} {
+    font-size: {{ block.settings.price_size }}px;
+    font-weight: {{ block.settings.price_weight }};
+    color: {{ block.settings.price_color }};
+    line-height: 1;
+  }
+ 
+  .price-compare-{{ uid }} {
+    font-size: {{ block.settings.compare_price_size }}px;
+    color: {{ block.settings.compare_price_color }};
+    text-decoration: line-through;
+    line-height: 1;
+  }
+ 
+  .discount-badge-{{ uid }} {
+    background-color: {{ block.settings.discount_badge_bg }};
+    color: {{ block.settings.discount_badge_color }};
+    padding: {{ block.settings.badge_padding_vertical }}px {{ block.settings.badge_padding_horizontal }}px;
+    border-radius: {{ block.settings.badge_border_radius }}px;
+    font-size: {{ block.settings.discount_size }}px;
+    font-weight: {{ block.settings.discount_weight }};
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+ 
+  @keyframes anim_bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+  }
+ 
+  @keyframes anim_flash {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.3; }
+  }
+ 
+  @keyframes anim_pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+ 
+  @keyframes anim_fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+ 
+  @keyframes anim_slide {
+    from { transform: translateY(15px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+ 
+  .discount-text-{{ uid }} {
+    display: inline-block;
+    {% if block.settings.animation_type != 'none' %}
+      animation-name: {{ block.settings.animation_type }};
+      animation-duration: {{ block.settings.animation_duration }}s;
+      animation-timing-function: {{ block.settings.animation_timing_function }};
+      animation-iteration-count: {{ block.settings.animation_iteration_count }};
+      animation-delay: {{ block.settings.animation_delay }}s;
+      animation-fill-mode: forwards;
+    {% endif %}
+  }
+ 
+  @media (max-width: 749px) {
+    .price-current-{{ uid }} {
+      font-size: {{ block.settings.price_size | times: 0.85 }}px;
+    }
+ 
+    .price-compare-{{ uid }} {
+      font-size: {{ block.settings.compare_price_size | times: 0.85 }}px;
+    }
+ 
+    .discount-badge-{{ uid }} {
+      font-size: {{ block.settings.discount_size | times: 0.85 }}px;
+      padding: {{ block.settings.badge_padding_vertical | times: 0.85 }}px {{ block.settings.badge_padding_horizontal | times: 0.85 }}px;
+    }
+  }
+{% endstyle %}
+ 
+<div class="price-container-{{ uid }}" {{ block.shopify_attributes }}>
+  <div class="price-row-{{ uid }}">
+    <span class="price-current-{{ uid }}">
+      {{ product.selected_or_first_available_variant.price | money }}
+    </span>
+ 
+    {% if product.compare_at_price_max > product.price %}
+      <span class="price-compare-{{ uid }}">
+        {{ product.compare_at_price_max | money }}
+      </span>
+ 
+      {% if block.settings.show_discount_badge %}
+        {% assign compare_price = product.compare_at_price_max %}
+        {% assign current_price = product.price %}
+        {% if compare_price > current_price %}
+          {% assign discount_amount = compare_price | minus: current_price %}
+          {% assign discount_percent = discount_amount | times: 100.0 | divided_by: compare_price | round %}
+          <span class="discount-badge-{{ uid }}">
+            <span class="discount-text-{{ uid }}">
+              {% if block.settings.discount_badge_text != blank %}
+                {{ block.settings.discount_badge_text | replace: '[discount]', discount_percent }}
+              {% else %}
+                {{ discount_percent }}% off
+              {% endif %}
+            </span>
+          </span>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+ 
+{% schema %}
+{
+  "name": "Product Price",
+  "tag": "section",
+  "class": "section-product-price",
+  "settings": [
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical spacing",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "price_spacing",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal spacing",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "min": 12,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Price font size",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "price_weight",
+      "label": "Price font weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "compare_price_size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Compare price size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Compare price color",
+      "default": "#767676"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount_badge",
+      "label": "Show discount badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "discount_badge_text",
+      "label": "Discount text",
+      "default": "Save [discount]%"
+    },
+    {
+      "type": "range",
+      "id": "discount_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge font size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "discount_weight",
+      "label": "Badge font weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "discount_badge_color",
+      "label": "Badge text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "discount_badge_bg",
+      "label": "Badge background",
+      "default": "#E31B1B"
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_vertical",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge vertical padding",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_horizontal",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge horizontal padding",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "badge_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge radius",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "animation_type",
+      "label": "Animation",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "anim_bounce", "label": "Bounce" },
+        { "value": "anim_flash", "label": "Flash" },
+        { "value": "anim_pulse", "label": "Pulse" },
+        { "value": "anim_fade", "label": "Fade" },
+        { "value": "anim_slide", "label": "Slide Up" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "min": 0.1,
+      "max": 5,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Animation duration",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "animation_timing_function",
+      "label": "Timing function",
+      "options": [
+        { "value": "ease", "label": "Ease" },
+        { "value": "linear", "label": "Linear" },
+        { "value": "ease-in", "label": "Ease In" },
+        { "value": "ease-out", "label": "Ease Out" },
+        { "value": "ease-in-out", "label": "Ease In Out" }
+      ],
+      "default": "ease"
+    },
+    {
+      "type": "select",
+      "id": "animation_iteration_count",
+      "label": "Repetitions",
+      "options": [
+        { "value": "1", "label": "Once" },
+        { "value": "2", "label": "Twice" },
+        { "value": "infinite", "label": "Infinite" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "min": 0,
+      "max": 10,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Animation delay",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product price"
+    }
+  ]
+}
+{% endschema %}
